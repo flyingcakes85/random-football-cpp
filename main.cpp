@@ -14,12 +14,55 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+    Contact the author : snehitsah[at]gmail[dot]com
 **/
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
+// Structure to hold variables
+// for vaious power-ups
+struct powerups
+{
+    // Power-up to allow player to
+    // attempt a shoot before they
+    // reach the goalkeeper
+    int longShoot;
+
+    // Power-up to allow player to
+    // select upto 8 numbers depending
+    //on difficulty chosen
+    int lucky8;
+
+    // Power-up to allow player to
+    // skip the toss at start of
+    // match and instead commence
+    // the game himself
+    int skipTheToss;
+};
+
+class userData
+{
+    // Variable to store score
+    // index 0 : wins
+    // index 1 : loses
+    // index 2 : draws
+    int score[3];
+
+    // Variable to hold player's name
+    char playerName[50];
+
+    // Coins, or the virual money
+    long int coins;
+
+    // Power-up database
+    powerups playerPowerUp;
+};
+
+//Function to get random
+//numbers from 1 to 10
 int getRandomNumber()
 {
     int theRandomNumber;
