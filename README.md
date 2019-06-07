@@ -1,2 +1,2 @@
 # random-football-cpp
-Work under sprogress!
+Work under progress!
