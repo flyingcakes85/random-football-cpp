@@ -19,6 +19,7 @@
 **/
 
 #include <bits/stdc++.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -67,15 +68,18 @@ int getRandomNumber()
 {
     int theRandomNumber;
     /**Code to generate the random number
-     * The random number is saved 
+     * The random number is saved
      * in variable theRandomNumber.
      * Function returns this number
      **/
+
+    theRandomNumber=rand()%10;
 
     return theRandomNumber;
 }
 
 int main()
 {
+
     return 0;
 }
