@@ -72,21 +72,32 @@ const char *userData::getPlayerName() const
     return playerName;
 }
 
+// Function to save user
+// data on the disk
 void saveData(userData &u)
 {
+    char playerName[50];
+    const char *p;
+    p = u.getPlayerName();
+    int i = 0;
+    for (i = 0; *(p + i) != '\0'; ++i)
+    {
+        playerName[i] = *(p + i);
+    }
+    playerName[i] = '\0';
+
     /**Function to save data
      * from the class &u (passed as argument)
      * to a file in binary format
      * Save file location should be:
      * C:\RandomFootball\[playerName].dat 
      * 
-     * playerName can be accessed using the
-     * accessor function in the class, like this
-     * 
-     * u.getPlayerName()
+     *Player Name is in the playerName variable
      */
 }
 
+// Function to load user
+// data from the disk
 void loadData(userData &u, char name[])
 {
     /**Function to load data
@@ -94,7 +105,7 @@ void loadData(userData &u, char name[])
      * C:\RandomFootball\[name].dat
      * to the class u passed as argument
      * 
-     * name has also been passes as argument
+     * name has also been passed as argument
      */
 }
 
