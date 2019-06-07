@@ -60,7 +60,17 @@ class userData
 
     // Power-up database
     powerups playerPowerUp;
+
+public:
+    // Function to return pointer
+    // to the playerName array
+    const char *getPlayerName() const;
 };
+
+const char *userData::getPlayerName() const
+{
+    return playerName;
+}
 
 void saveData(userData &u)
 {
@@ -69,6 +79,11 @@ void saveData(userData &u)
      * to a file in binary format
      * Save file location should be:
      * C:\RandomFootball\[playerName].dat 
+     * 
+     * playerName can be accessed using the
+     * accessor function in the class, like this
+     * 
+     * u.getPlayerName()
      */
 }
 
@@ -78,6 +93,8 @@ void loadData(userData &u, char name[])
      * from the file at :
      * C:\RandomFootball\[name].dat
      * to the class u passed as argument
+     * 
+     * name has also been passes as argument
      */
 }
 
