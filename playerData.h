@@ -55,18 +55,32 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
-    // Coins, or the virual money
+    // Coins, or the virual money 
     long int coins;
 
     // Power-up database
     powerups playerPowerUp;
 
 public:
+    //Function to input player's data
+    void input();
     // Function to return pointer
     // to the playerName array
     const char *getPlayerName() const;
 };
-
+void userData::input()
+{
+    cout<<"Enter Player's Score(Wins,Loses,Draws):";
+    cin>>score[0]>>score[1]>>score[2];
+    cout<<"Enter Player's Name:";
+    gets(playerName);
+    cout<<"Enter No of Coins available:";
+    cin>>coins;
+    cout<<"Enter Player's Powerups:"<<endl;
+    cout<<"Long Shoot Ability=";cin>>playerPowerUp.longShoot;
+    cout<<"Lucky Ability=";cin>>playerPowerUp.lucky8;
+    cout<<"Skip The Toss Ability=";cin>>playerPowerUp.skipTheToss;
+}
 const char *userData::getPlayerName() const
 {
     return playerName;
