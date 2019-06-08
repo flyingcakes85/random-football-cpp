@@ -21,10 +21,6 @@
 #ifndef _PLAYERDATA_
 #define _PLAYERDATA_
 
-#include <iostream>
-#include <fstream>
-#include <string.h>
-
 // Structure to hold variables
 // for various power-ups
 struct powerups
@@ -64,11 +60,23 @@ class userData
     powerups playerPowerUp;
 
 public:
+    //Function to input player's data
+    void input();
     // Function to return pointer
     // to the playerName array
     const char *getPlayerName() const;
 };
 
+// Function to input
+// user data
+void userData::input()
+{
+    cout << "Enter Player's Name:";
+    scanf(" %[^\n]s\n", playerName);
+}
+
+// Function to return pointer
+// to the playerName array
 const char *userData::getPlayerName() const
 {
     return playerName;
@@ -78,6 +86,15 @@ const char *userData::getPlayerName() const
 // data on the disk
 void saveData(userData &u)
 {
+    /**Function to save data
+     * from the class &u (passed as argument)
+     * to a file in binary format
+     * Save file location should be:
+     * C:\RandomFootball\[playerName].dat
+     *
+     *Player Name is in the playerName variable
+     */
+
     char playerName[50];
     const char *p;
     p = u.getPlayerName();
@@ -87,15 +104,6 @@ void saveData(userData &u)
         playerName[i] = *(p + i);
     }
     playerName[i] = '\0';
-
-    /**Function to save data
-     * from the class &u (passed as argument)
-     * to a file in binary format
-     * Save file location should be:
-     * C:\RandomFootball\[playerName].dat
-     *
-     *Player Name is in the playerName variable
-     */
 }
 
 // Function to load user
@@ -116,15 +124,14 @@ void loadData(userData &u)
     strcat(fileName, ".dat");
     ifstream loadPlayerData;
     loadPlayerData.open(fileName, ios::binary);
-    if(loadPlayerData)
+    if (loadPlayerData)
     {
-        cout<<"Saved game data loaded!";
+        cout << "Saved game data loaded!";
     }
     else
     {
-        cout<<"No game data saved by this name!";
+        cout << "No game data saved by this name!";
     }
-
 }
 
 #endif
