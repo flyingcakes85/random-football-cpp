@@ -22,9 +22,11 @@
 #define _PLAYERDATA_
 
 #include <iostream>
+#include <fstream>
+#include <string.h>
 
 // Structure to hold variables
-// for vaious power-ups
+// for various power-ups
 struct powerups
 {
     // Power-up to allow player to
@@ -55,7 +57,7 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
-    // Coins, or the virual money
+    // Coins, or the virtual money
     long int coins;
 
     // Power-up database
@@ -90,23 +92,39 @@ void saveData(userData &u)
      * from the class &u (passed as argument)
      * to a file in binary format
      * Save file location should be:
-     * C:\RandomFootball\[playerName].dat 
-     * 
+     * C:\RandomFootball\[playerName].dat
+     *
      *Player Name is in the playerName variable
      */
 }
 
 // Function to load user
 // data from the disk
-void loadData(userData &u, char name[])
+void loadData(userData &u)
 {
     /**Function to load data
      * from the file at :
      * C:\RandomFootball\[name].dat
      * to the class u passed as argument
-     * 
+     *
      * name has also been passed as argument
      */
+
+    char fileName[100];
+    strcpy(fileName, "C:\\RandomFootball\\");
+    strcat(fileName, u.getPlayerName());
+    strcat(fileName, ".dat");
+    ifstream loadPlayerData;
+    loadPlayerData.open(fileName, ios::binary);
+    if(loadPlayerData)
+    {
+        cout<<"Saved game data loaded!";
+    }
+    else
+    {
+        cout<<"No game data saved by this name!";
+    }
+
 }
 
 #endif

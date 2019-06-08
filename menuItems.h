@@ -22,18 +22,43 @@
 #define _MENUTEMS_
 
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
 
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CP;
+
+void gotoXY(int x, int y)
+{
+    CP.X = x;
+    CP.Y = y;
+    SetConsoleCursorPosition(console, CP);
+}
+
 void showMenu()
 {
-    /**Code to print a menu with following opions:
+    /**Code to print a menu with following options:
      * 1. Start Game
      * 2. Load/Save Data
      * 3. Store
      * 4. Help
      * 5. About
      */
+
+     gotoXY(15, 4);
+     cout<<"Select an option below: ";
+
+     gotoXY(20, 6);
+     cout<<"1.     Start Game";
+     gotoXY(20, 7);
+     cout<<"2.     Load/Save Game";
+     gotoXY(20, 8);
+     cout<<"3.     Store";
+     gotoXY(20, 9);
+     cout<<"4.     Help";
+     gotoXY(20, 10);
+     cout<<"5.     About";
 }
 
 #endif
