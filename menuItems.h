@@ -27,6 +27,11 @@ using namespace std;
 
 void showMenu()
 {
+    cout<<"1. Start Game"<<endl;
+    cout<<"2. Load/Save Data"<<endl
+    cout<<"3. Store"<<endl;
+    cout<<"4. Help"<<endl;
+    cout<<"5. About"<<endl;
     /**Code to print a menu with following opions:
      * 1. Start Game
      * 2. Load/Save Data
@@ -35,5 +40,6 @@ void showMenu()
      * 5. About
      */
 }
+
 
 #endif
