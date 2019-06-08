@@ -22,21 +22,47 @@
 #define _FUNCTIONALITIES_
 
 #include <stdlib.h>
+#include <ctime>
+using namespace std;
 
 //Function to get random
 //numbers from 1 to 10
-int getRandomNumber()
+int *getUniqueRandomNumbers(int size)
 {
-    int theRandomNumber;
+    int temp, s = 0;
+    static int theRandomNumbers[5];
+
     /**Code to generate the random number
-     * The random number is saved
-     * in variable theRandomNumber.
+     * The random numbers are saved
+     * in variable theRandomNumbers.
      * Function returns this number
      **/
 
-    theRandomNumber = rand() % 10;
+    // set the seed
+    srand((unsigned)time(NULL));
 
-    return theRandomNumber;
+    for (int i = 0; i < size; ++i)
+    {
+        s = 0;
+        temp = rand() % 10;
+
+        for (int j = 0; j < i; ++j)
+        {
+            if (theRandomNumbers[j] == temp)
+            {
+                --i;
+                s = 1;
+                break;
+            }
+        }
+
+        if (s == 0)
+        {
+            theRandomNumbers[i] = temp;
+        }
+    }
+
+    return theRandomNumbers;
 }
 
 #endif
