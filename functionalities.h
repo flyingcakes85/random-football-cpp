@@ -23,6 +23,8 @@
 
 #include <stdlib.h>
 #include <ctime>
+#include "functionalities.h"
+
 using namespace std;
 
 //Function to get random
@@ -63,6 +65,28 @@ int *getUniqueRandomNumbers(int size)
     }
 
     return theRandomNumbers;
+}
+
+//Generates a random number and returns
+int getRandomNumber(){
+    int theRandomNumber;
+
+
+    return theRandomNumber; 
+}
+
+
+// Checks whether the user inputed
+// numbers match the random number
+int checkMatch()
+{
+    // Result = 1, if any of the user inputted number matches the random number
+    // Result = 0, if any of the user inputted number does not match the random number
+    int result;
+
+    //using the getRandomNumber function
+
+    return result;
 }
 
 #endif
