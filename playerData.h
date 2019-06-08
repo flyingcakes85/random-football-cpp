@@ -55,7 +55,7 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
-    // Coins, or the virual moneys 
+    // Coins, or the virual money 
     long int coins;
 
     // Power-up database
