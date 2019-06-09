@@ -21,8 +21,8 @@
 #ifndef _PLAYERDATA_
 #define _PLAYERDATA_
 
-#include<iostream>
-#include<string.h>
+#include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -30,10 +30,10 @@ using namespace std;
 void delay(unsigned int mseconds)
 {
     clock_t goal = mseconds + clock();
-    while (goal > clock());
+    while (goal > clock())
+    {
+    }
 }
-
-
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CP;
@@ -83,14 +83,44 @@ class userData
     // Power-up database
     powerups playerPowerUp;
 
-
+    // Checks if class
+    // has data
+    bool hasData;
 
 public:
+    // Default Constructor
+    userData()
+    {
+        score[0] = 0;
+        score[1] = 0;
+        score[2] = 0;
+
+        coins = 0;
+
+        playerPowerUp.longShot = 0;
+        playerPowerUp.lucky8 = 0;
+        playerPowerUp.skipTheToss = 0;
+
+        hasData = false;
+    }
     //Function to input player's data
     void input();
+
     // Function to return pointer
     // to the playerName array
     const char *getPlayerName() const;
+
+    // Function to load data
+    void loadData();
+
+    // Fuction to save data
+    void saveData();
+
+    // Function to update playerName
+    void setPlayerName(char name[]);
+
+    // Return hasData
+    bool HasData();
 };
 
 // Function to input
@@ -109,9 +139,16 @@ const char *userData::getPlayerName() const
     return playerName;
 }
 
+// Function to update playerName
+void userData::setPlayerName(char name[])
+{
+    strcpy(playerName, name);
+    hasData = true;
+}
+
 // Function to save user
 // data on the disk
-void saveData(userData &u)
+void userData::saveData()
 {
     /**Function to save data
      * from the class &u (passed as argument)
@@ -121,22 +158,38 @@ void saveData(userData &u)
      *
      *Player Name is in the playerName variable
      */
-    u.input();
+
+    if (hasData == false)
+    {
+        char name[50];
+        cout << endl
+             << "Please enter a name: ";
+        scanf(" %[^\n]s\n", name);
+        setPlayerName(name);
+    }
     char saveFileName[100];
     strcpy(saveFileName, "C:\\RandomFootball\\");
-    strcat(saveFileName, u.getPlayerName());
+    strcat(saveFileName, playerName);
     strcat(saveFileName, ".dat");
     ofstream savePlayerData;
     savePlayerData.open(saveFileName, ios::binary);
+    // Function to write
     gotoXY(20, 7);
-    cout<<"Game data saved!";
+    cout << endl
+         << "Game data saved!";
+}
+
+// Return hasData
+bool userData::HasData()
+{
+    return hasData;
 }
 
 // Function to load user
 // data from the disk
-void loadData(userData &u)
+void userData::loadData()
 {
-    /**Function to load data
+/**Function to load data
      * from the file at :
      * C:\RandomFootball\[name].dat
      * to the class u passed as argument
@@ -144,36 +197,38 @@ void loadData(userData &u)
      * name has also been passed as argument
      */
 addUserData:
-    u.input();
+    char name[50];
+    scanf(" %[^\n]s\n", name);
+    setPlayerName(name);
     char loadFileName[100];
     strcpy(loadFileName, "C:\\RandomFootball\\");
-    strcat(loadFileName, u.getPlayerName());
+    strcat(loadFileName, name);
     strcat(loadFileName, ".dat");
     ifstream loadPlayerData;
     loadPlayerData.open(loadFileName, ios::binary);
     if (loadPlayerData)
     {
         gotoXY(18, 7);
-        cout<<"Loading game data ";
-        delay(1000);
-        cout<<". ";
-        delay(1000);
-        cout<<". ";
-        delay(1000);
-        cout<<". ";
+        cout << "Loading game data ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
         gotoXY(18, 9);
         cout << "Saved game data loaded!";
     }
     else
     {
         gotoXY(18, 7);
-        cout<<"Loading game data ";
-        delay(1000);
-        cout<<". ";
-        delay(1000);
-        cout<<". ";
-        delay(1000);
-        cout<<". ";
+        cout << "Loading game data ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
         gotoXY(18, 9);
         cout << "No game data saved by this name! Please retry!";
         delay(3000);

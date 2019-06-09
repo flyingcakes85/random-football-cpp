@@ -66,18 +66,12 @@ using namespace std;
  * the required function will be called.
  */
 
-
-
-
-
-
-
 // Function to show the
 // help text for the game
 void showHelp()
 {
     //this function shall be expanded later on;
-    cout<<"This is the help text";
+    cout << "This is the help text";
 }
 
 // Function to show the
@@ -85,9 +79,8 @@ void showHelp()
 void showAbout()
 {
     //this function shall be expanded later on;
-    cout<<"This is the about text";
+    cout << "This is the about text";
 }
-
 
 //Function to show main menu
 void showMenu(int selectionArray[2])
@@ -102,23 +95,23 @@ void showMenu(int selectionArray[2])
      */
     userData u;
     bool running = true;
-    int x=6, menuItem=0;
+    int x = 6, menuItem = 0;
 
     bool playing = true;
-    int y=6, difficultyItem=0;
+    int y = 6, difficultyItem = 0;
 
     bool loadingSaving = true;
-    int z=6, loadSaveItem=0;
+    int z = 6, loadSaveItem = 0;
 
     bool buyPowerups = true;
-    int a=6, powerupItem=0;
+    int a = 6, powerupItem = 0;
 
     gotoXY(15, 4);
     cout << "MAIN MENU! Select an option below: ";
     gotoXY(16, 6);
     cout << "->";
 
-    while(running)
+    while (running)
     {
         gotoXY(20, 6);
         cout << "1.     Start Game";
@@ -134,78 +127,78 @@ void showMenu(int selectionArray[2])
         cout << "6.     Exit";
         system("pause>nul");
 
-        if(GetAsyncKeyState(VK_DOWN) && x!=11)
+        if (GetAsyncKeyState(VK_DOWN) && x != 11)
         {
-            gotoXY(16,x);
-            gotoXY(16,x);
+            gotoXY(16, x);
+            gotoXY(16, x);
             cout << "  ";
             x++;
-            gotoXY(16,x);
+            gotoXY(16, x);
             cout << "->";
             menuItem++;
             continue;
         }
-        if(GetAsyncKeyState(VK_UP) && x!=6)
+        if (GetAsyncKeyState(VK_UP) && x != 6)
         {
-            gotoXY(16,x);
-            gotoXY(16,x);
+            gotoXY(16, x);
+            gotoXY(16, x);
             cout << "  ";
             x--;
-            gotoXY(16,x);
+            gotoXY(16, x);
             cout << "->";
             menuItem--;
             continue;
         }
-        if(GetAsyncKeyState(VK_RETURN))
+        if (GetAsyncKeyState(VK_RETURN))
         {
-            switch(menuItem)
+            switch (menuItem)
             {
             case 0:
                 system("cls");
 
                 gotoXY(15, 5);
-                cout<<"Starting new game! Choose a difficulty to continue: ";
+                cout << "Starting new game! Choose a difficulty to continue: ";
                 gotoXY(16, 6);
-                cout<<"->";
-                while(playing)
+                cout << "->";
+                while (playing)
                 {
                     gotoXY(20, 6);
-                    cout<<"1.   Easy";
+                    cout << "1.   Easy";
                     gotoXY(20, 7);
-                    cout<<"2.   Intermediate";
+                    cout << "2.   Intermediate";
                     gotoXY(20, 8);
-                    cout<<"3.   Hard";
+                    cout << "3.   Hard";
                     system("pause>nul");
-                    if(GetAsyncKeyState(VK_DOWN) && y!=8)
+                    if (GetAsyncKeyState(VK_DOWN) && y != 8)
                     {
-                        gotoXY(16,y);
-                        gotoXY(16,y);
+                        gotoXY(16, y);
+                        gotoXY(16, y);
                         cout << "  ";
                         y++;
-                        gotoXY(16,y);
+                        gotoXY(16, y);
                         cout << "->";
                         difficultyItem++;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_UP) && y!=6)
+                    if (GetAsyncKeyState(VK_UP) && y != 6)
                     {
-                        gotoXY(16,y);
-                        gotoXY(16,y);
+                        gotoXY(16, y);
+                        gotoXY(16, y);
                         cout << "  ";
                         y--;
-                        gotoXY(16,y);
+                        gotoXY(16, y);
                         cout << "->";
                         difficultyItem--;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_RETURN))
+                    if (GetAsyncKeyState(VK_RETURN))
                     {
-                        switch(difficultyItem)
+                        switch (difficultyItem)
                         {
                         case 0:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"Easy mode!";
+                            cout << "Easy mode!";
                             selectionArray[0] = 1;
                             selectionArray[1] = 1;
                             //call the Necessary Function
@@ -216,7 +209,7 @@ void showMenu(int selectionArray[2])
                         case 1:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"Intermediate mode!";
+                            cout << "Intermediate mode!";
                             selectionArray[0] = 1;
                             selectionArray[1] = 2;
                             //call the Necessary Function
@@ -227,7 +220,7 @@ void showMenu(int selectionArray[2])
                         case 2:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"Hard mode!";
+                            cout << "Hard mode!";
                             selectionArray[0] = 1;
                             selectionArray[1] = 3;
                             //call the Necessary Function
@@ -236,7 +229,6 @@ void showMenu(int selectionArray[2])
                             break;
                         }
                     }
-
                 }
                 system("pause>nul");
                 running = false;
@@ -246,47 +238,46 @@ void showMenu(int selectionArray[2])
                 system("cls");
 
                 gotoXY(15, 5);
-                cout<<"Choose to Load/Save your Game Data: ";
+                cout << "Choose to Load/Save your Game Data: ";
                 gotoXY(16, 6);
-                cout<<"->";
-                while(loadingSaving)
+                cout << "->";
+                while (loadingSaving)
                 {
                     gotoXY(20, 6);
-                    cout<<"1.   Save game data";
+                    cout << "1.   Save game data";
                     gotoXY(20, 7);
-                    cout<<"2.   Load game data";
+                    cout << "2.   Load game data";
                     system("pause>nul");
-                    if(GetAsyncKeyState(VK_DOWN) && z!=7)
+                    if (GetAsyncKeyState(VK_DOWN) && z != 7)
                     {
-                        gotoXY(16,z);
-                        gotoXY(16,z);
+                        gotoXY(16, z);
+                        gotoXY(16, z);
                         cout << "  ";
                         z++;
-                        gotoXY(16,z);
+                        gotoXY(16, z);
                         cout << "->";
                         loadSaveItem++;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_UP) && z!=6)
+                    if (GetAsyncKeyState(VK_UP) && z != 6)
                     {
-                        gotoXY(16,z);
-                        gotoXY(16,z);
+                        gotoXY(16, z);
+                        gotoXY(16, z);
                         cout << "  ";
                         z--;
-                        gotoXY(16,z);
+                        gotoXY(16, z);
                         cout << "->";
                         loadSaveItem--;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_RETURN))
+                    if (GetAsyncKeyState(VK_RETURN))
                     {
-                        switch(loadSaveItem)
+                        switch (loadSaveItem)
                         {
                         case 0:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"Saving game data!";
-                            saveData(u);
+                            cout << "Saving game data!";
                             selectionArray[0] = 2;
                             selectionArray[1] = 1;
                             //call the Necessary Function
@@ -297,7 +288,7 @@ void showMenu(int selectionArray[2])
                         case 1:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"Loading game data!";
+                            cout << "Loading game data!";
                             selectionArray[0] = 2;
                             selectionArray[1] = 2;
                             system("pause>nul");
@@ -314,48 +305,48 @@ void showMenu(int selectionArray[2])
                 system("cls");
 
                 gotoXY(15, 5);
-                cout<<"Welcome to the store! Select PowerUp to buy: ";
+                cout << "Welcome to the store! Select PowerUp to buy: ";
                 gotoXY(16, 6);
-                cout<<"->";
-                while(powerupItem)
+                cout << "->";
+                while (powerupItem)
                 {
                     gotoXY(20, 6);
-                    cout<<"1.   Skip The Toss";
+                    cout << "1.   Skip The Toss";
                     gotoXY(20, 7);
-                    cout<<"2.   Lucky '8'";
+                    cout << "2.   Lucky '8'";
                     gotoXY(20, 8);
-                    cout<<"3.   Long Shot";
+                    cout << "3.   Long Shot";
                     system("pause>nul");
-                    if(GetAsyncKeyState(VK_DOWN) && a!=8)
+                    if (GetAsyncKeyState(VK_DOWN) && a != 8)
                     {
-                        gotoXY(16,a);
-                        gotoXY(16,a);
+                        gotoXY(16, a);
+                        gotoXY(16, a);
                         cout << "  ";
                         a++;
-                        gotoXY(16,a);
+                        gotoXY(16, a);
                         cout << "->";
                         powerupItem++;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_UP) && a!=6)
+                    if (GetAsyncKeyState(VK_UP) && a != 6)
                     {
-                        gotoXY(16,a);
-                        gotoXY(16,a);
+                        gotoXY(16, a);
+                        gotoXY(16, a);
                         cout << "  ";
                         a--;
-                        gotoXY(16,a);
+                        gotoXY(16, a);
                         cout << "->";
                         powerupItem--;
                         continue;
                     }
-                    if(GetAsyncKeyState(VK_RETURN))
+                    if (GetAsyncKeyState(VK_RETURN))
                     {
-                        switch(difficultyItem)
+                        switch (difficultyItem)
                         {
                         case 0:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"You chose to skip the toss!";
+                            cout << "You chose to skip the toss!";
                             selectionArray[0] = 3;
                             selectionArray[1] = 1;
                             //call the Necessary Function
@@ -366,7 +357,7 @@ void showMenu(int selectionArray[2])
                         case 1:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"You chose to be lucky!";
+                            cout << "You chose to be lucky!";
                             selectionArray[0] = 3;
                             selectionArray[1] = 2;
                             //call the Necessary Function
@@ -377,7 +368,7 @@ void showMenu(int selectionArray[2])
                         case 2:
                             system("cls");
                             gotoXY(15, 5);
-                            cout<<"You chose to take a long shot!";
+                            cout << "You chose to take a long shot!";
                             selectionArray[0] = 3;
                             selectionArray[1] = 3;
                             //call the Necessary Function
@@ -386,7 +377,6 @@ void showMenu(int selectionArray[2])
                             break;
                         }
                     }
-
                 }
                 system("pause>nul");
                 running = false;
@@ -413,13 +403,13 @@ void showMenu(int selectionArray[2])
             case 5:
                 system("cls");
                 gotoXY(15, 5);
-                cout<<"Exiting the game. Please wait ";
+                cout << "Exiting the game. Please wait ";
                 delay(1000);
-                cout<<". ";
+                cout << ". ";
                 delay(1000);
-                cout<<". ";
+                cout << ". ";
                 delay(1000);
-                cout<<". "<<endl;
+                cout << ". " << endl;
                 delay(500);
                 exit(0);
             }
