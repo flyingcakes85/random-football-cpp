@@ -21,6 +21,28 @@
 #ifndef _PLAYERDATA_
 #define _PLAYERDATA_
 
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+//Function for delay
+void delay(unsigned int mseconds)
+{
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
+}
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CP;
+
+void gotoXY(int x, int y)
+{
+    CP.X = x;
+    CP.Y = y;
+    SetConsoleCursorPosition(console, CP);
+}
+
 // Structure to hold variables
 // for various power-ups
 struct powerups
@@ -71,7 +93,8 @@ public:
 // user data
 void userData::input()
 {
-    cout << "Enter Player's Name:";
+    gotoXY(15, 5);
+    cout << "Enter Player's Name to load game data: ";
     scanf(" %[^\n]s\n", playerName);
 }
 
@@ -117,7 +140,7 @@ void loadData(userData &u)
      *
      * name has also been passed as argument
      */
-
+    u.input();
     char fileName[100];
     strcpy(fileName, "C:\\RandomFootball\\");
     strcat(fileName, u.getPlayerName());
@@ -126,10 +149,16 @@ void loadData(userData &u)
     loadPlayerData.open(fileName, ios::binary);
     if (loadPlayerData)
     {
+        gotoXY(18, 7);
+        cout<<"Loading game data ";delay(1000);cout<<". ";delay(1000);cout<<". ";delay(1000);cout<<". ";
+        gotoXY(18, 9);
         cout << "Saved game data loaded!";
     }
     else
     {
+        gotoXY(18, 7);
+        cout<<"Loading game data ";delay(1000);cout<<". ";delay(1000);cout<<". ";delay(1000);cout<<". ";
+        gotoXY(18, 9);
         cout << "No game data saved by this name!";
     }
 }
