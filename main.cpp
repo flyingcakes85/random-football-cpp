@@ -21,6 +21,7 @@
 #include <bits/stdc++.h>
 #include "playerData.h"
 #include "menuItems.h"
+#include "functionalities.h"
 
 using namespace std;
 
@@ -29,3 +30,14 @@ int main()
 
     return 0;
 }
+
+// Code to get random numbers from the function:
+// int *p;
+
+// p = getUniqueRandomNumbers(4);
+// int r[4];
+
+// for (int i = 0; i < 4; ++i)
+// {
+//     r[i] = *(p + i);
+// }
