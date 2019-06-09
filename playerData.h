@@ -21,6 +21,30 @@
 #ifndef _PLAYERDATA_
 #define _PLAYERDATA_
 
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+//Function for delay
+void delay(unsigned int mseconds)
+{
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
+}
+
+
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CP;
+
+void gotoXY(int x, int y)
+{
+    CP.X = x;
+    CP.Y = y;
+    SetConsoleCursorPosition(console, CP);
+}
+
 // Structure to hold variables
 // for various power-ups
 struct powerups
@@ -28,7 +52,7 @@ struct powerups
     // Power-up to allow player to
     // attempt a shoot before they
     // reach the goalkeeper
-    int longShoot;
+    int longShot;
 
     // Power-up to allow player to
     // select upto 8 numbers depending
@@ -59,6 +83,8 @@ class userData
     // Power-up database
     powerups playerPowerUp;
 
+
+
 public:
     //Function to input player's data
     void input();
@@ -71,7 +97,8 @@ public:
 // user data
 void userData::input()
 {
-    cout << "Enter Player's Name:";
+    gotoXY(15, 5);
+    cout << "Enter Player's Name: ";
     scanf(" %[^\n]s\n", playerName);
 }
 
@@ -94,16 +121,15 @@ void saveData(userData &u)
      *
      *Player Name is in the playerName variable
      */
-
-    char playerName[50];
-    const char *p;
-    p = u.getPlayerName();
-    int i = 0;
-    for (i = 0; *(p + i) != '\0'; ++i)
-    {
-        playerName[i] = *(p + i);
-    }
-    playerName[i] = '\0';
+    u.input();
+    char saveFileName[100];
+    strcpy(saveFileName, "C:\\RandomFootball\\");
+    strcat(saveFileName, u.getPlayerName());
+    strcat(saveFileName, ".dat");
+    ofstream savePlayerData;
+    savePlayerData.open(saveFileName, ios::binary);
+    gotoXY(20, 7);
+    cout<<"Game data saved!";
 }
 
 // Function to load user
@@ -117,20 +143,42 @@ void loadData(userData &u)
      *
      * name has also been passed as argument
      */
-
-    char fileName[100];
-    strcpy(fileName, "C:\\RandomFootball\\");
-    strcat(fileName, u.getPlayerName());
-    strcat(fileName, ".dat");
+addUserData:
+    u.input();
+    char loadFileName[100];
+    strcpy(loadFileName, "C:\\RandomFootball\\");
+    strcat(loadFileName, u.getPlayerName());
+    strcat(loadFileName, ".dat");
     ifstream loadPlayerData;
-    loadPlayerData.open(fileName, ios::binary);
+    loadPlayerData.open(loadFileName, ios::binary);
     if (loadPlayerData)
     {
+        gotoXY(18, 7);
+        cout<<"Loading game data ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        gotoXY(18, 9);
         cout << "Saved game data loaded!";
     }
     else
     {
-        cout << "No game data saved by this name!";
+        gotoXY(18, 7);
+        cout<<"Loading game data ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        gotoXY(18, 9);
+        cout << "No game data saved by this name! Please retry!";
+        delay(3000);
+        system("cls");
+        goto addUserData;
     }
 }
 
