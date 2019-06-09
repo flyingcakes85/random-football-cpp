@@ -98,9 +98,7 @@ void showMenu()
      * 4. Help
      * 5. About
      */
-    char playerName;
     userData u;
-
     bool running = true;
     int x=6, menuItem=0;
 
@@ -285,6 +283,7 @@ void showMenu()
                         case 1:
                             system("cls");
                             loadData(u);
+
                             system("pause>nul");
                             loadingSaving = false;
                             break;

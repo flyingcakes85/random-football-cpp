@@ -33,6 +33,8 @@ void delay(unsigned int mseconds)
     while (goal > clock());
 }
 
+
+
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CP;
 
@@ -80,6 +82,8 @@ class userData
 
     // Power-up database
     powerups playerPowerUp;
+
+
 
 public:
     //Function to input player's data
@@ -140,6 +144,7 @@ void loadData(userData &u)
      *
      * name has also been passed as argument
      */
+addUserData:
     u.input();
     char fileName[100];
     strcpy(fileName, "C:\\RandomFootball\\");
@@ -150,16 +155,31 @@ void loadData(userData &u)
     if (loadPlayerData)
     {
         gotoXY(18, 7);
-        cout<<"Loading game data ";delay(1000);cout<<". ";delay(1000);cout<<". ";delay(1000);cout<<". ";
+        cout<<"Loading game data ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
         gotoXY(18, 9);
         cout << "Saved game data loaded!";
     }
     else
     {
         gotoXY(18, 7);
-        cout<<"Loading game data ";delay(1000);cout<<". ";delay(1000);cout<<". ";delay(1000);cout<<". ";
+        cout<<"Loading game data ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
+        delay(1000);
+        cout<<". ";
         gotoXY(18, 9);
-        cout << "No game data saved by this name!";
+        cout << "No game data saved by this name! Please retry!";
+        delay(3000);
+        system("cls");
+        goto addUserData;
     }
 }
 
