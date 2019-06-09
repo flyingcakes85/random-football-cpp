@@ -134,7 +134,6 @@ void userData::input()
 
 // Function to return pointer
 // to the playerName array
->>>>>>> refs/remotes/snehitsah/master
 const char *userData::getPlayerName() const
 {
     return playerName;

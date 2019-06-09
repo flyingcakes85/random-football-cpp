@@ -78,24 +78,25 @@ int getRandomNumber()
 // Checks whether the user inputed
 // numbers match the random number
 int checkMatch(int getno[])
-{   
+{
     // Result = 1, if any of the user inputted number matches the random number
     // Result = 0, if any of the user inputted number does not match the random number
     int result;
 
     //using the getRandomNumber function
-    for (i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
-        if (getno[i]==getRandomNumber())
-    {
-        result=1
-    }
+        if (getno[i] == getRandomNumber())
+        {
+            result = 1;
+        }
         else
-    {
-        result=0
+        {
+            result = 0;
+        }
+
+        return result;
     }
-         
-    return result;
 }
 
 int startGame(int guesses, userData &player)
