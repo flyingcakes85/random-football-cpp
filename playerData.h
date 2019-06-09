@@ -77,11 +77,8 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
-<<<<<<< HEAD
-    // Coins, or the virual money 
-=======
+
     // Coins, or the virtual money
->>>>>>> refs/remotes/snehitsah/master
     long int coins;
 
     // Power-up database
@@ -126,22 +123,6 @@ public:
     // Return hasData
     bool HasData();
 };
-<<<<<<< HEAD
-void userData::input()
-{
-    cout<<"Enter Player's Score(Wins,Loses,Draws):";
-    cin>>score[0]>>score[1]>>score[2];
-    cout<<"Enter Player's Name:";
-    gets(playerName);
-    cout<<"Enter No of Coins available:";
-    cin>>coins;
-    cout<<"Enter Player's Powerups:"<<endl;
-    cout<<"Long Shoot Ability=";cin>>playerPowerUp.longShoot;
-    cout<<"Lucky Ability=";cin>>playerPowerUp.lucky8;
-    cout<<"Skip The Toss Ability=";cin>>playerPowerUp.skipTheToss;
-}
-=======
-
 // Function to input
 // user data
 void userData::input()
