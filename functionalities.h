@@ -68,25 +68,50 @@ int *getUniqueRandomNumbers(int size)
 }
 
 //Generates a random number and returns
-int getRandomNumber(){
+int getRandomNumber()
+{
     int theRandomNumber;
 
-
-    return theRandomNumber; 
+    return theRandomNumber;
 }
-
 
 // Checks whether the user inputed
 // numbers match the random number
-int checkMatch()
+int checkMatch(int getno[])
 {
     // Result = 1, if any of the user inputted number matches the random number
     // Result = 0, if any of the user inputted number does not match the random number
     int result;
 
     //using the getRandomNumber function
+    for (int i = 0; i < 5; i++)
+    {
+        if (getno[i] == getRandomNumber())
+        {
+            result = 1;
+        }
+        else
+        {
+            result = 0;
+        }
 
-    return result;
+        return result;
+    }
 }
 
+int startGame(int guesses, userData &player)
+{
+    cout << endl
+         << "started with " << guesses;
+
+    // Ask for name if
+    // player doesn't already have
+    if (player.HasData() == false)
+    {
+        char name[50];
+        scanf(" %[^\n]s\n", name);
+        player.setPlayerName(name);
+    }
+    return 0;
+}
 #endif
