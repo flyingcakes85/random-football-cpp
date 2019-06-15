@@ -83,7 +83,7 @@ void showAbout()
 }
 
 //Function to show main menu
-void showMenu(int selectionArray[2])
+void showMenu()
 {
     system("cls");
     /**Code to print a menu with following options:
@@ -199,10 +199,6 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Easy mode!";
-                            selectionArray[0] = 1;
-                            selectionArray[1] = 1;
-                            //call the Necessary Function
-                            system("pause>nul");
                             playing = false;
                             break;
 
@@ -210,10 +206,6 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Intermediate mode!";
-                            selectionArray[0] = 1;
-                            selectionArray[1] = 2;
-                            //call the Necessary Function
-                            system("pause>nul");
                             playing = false;
                             break;
 
@@ -221,10 +213,6 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Hard mode!";
-                            selectionArray[0] = 1;
-                            selectionArray[1] = 3;
-                            //call the Necessary Function
-                            system("pause>nul");
                             playing = false;
                             break;
                         }
@@ -278,10 +266,7 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Saving game data!";
-                            selectionArray[0] = 2;
-                            selectionArray[1] = 1;
-                            //call the Necessary Function
-                            system("pause>nul");
+                            u.saveData();
                             loadingSaving = false;
                             break;
 
@@ -289,9 +274,7 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Loading game data!";
-                            selectionArray[0] = 2;
-                            selectionArray[1] = 2;
-                            system("pause>nul");
+                            u.loadData();
                             loadingSaving = false;
                             break;
                         }
@@ -308,7 +291,7 @@ void showMenu(int selectionArray[2])
                 cout << "Welcome to the store! Select PowerUp to buy: ";
                 gotoXY(16, 6);
                 cout << "->";
-                while (powerupItem)
+                while (buyPowerups)
                 {
                     gotoXY(20, 6);
                     cout << "1.   Skip The Toss";
@@ -341,16 +324,12 @@ void showMenu(int selectionArray[2])
                     }
                     if (GetAsyncKeyState(VK_RETURN))
                     {
-                        switch (difficultyItem)
+                        switch (powerupItem)
                         {
                         case 0:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to skip the toss!";
-                            selectionArray[0] = 3;
-                            selectionArray[1] = 1;
-                            //call the Necessary Function
-                            system("pause>nul");
                             buyPowerups = false;
                             break;
 
@@ -358,10 +337,6 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to be lucky!";
-                            selectionArray[0] = 3;
-                            selectionArray[1] = 2;
-                            //call the Necessary Function
-                            system("pause>nul");
                             buyPowerups = false;
                             break;
 
@@ -369,10 +344,6 @@ void showMenu(int selectionArray[2])
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to take a long shot!";
-                            selectionArray[0] = 3;
-                            selectionArray[1] = 3;
-                            //call the Necessary Function
-                            system("pause>nul");
                             buyPowerups = false;
                             break;
                         }
@@ -385,18 +356,14 @@ void showMenu(int selectionArray[2])
             case 3:
                 system("cls");
                 gotoXY(15, 5);
-                selectionArray[0] = 4;
-                selectionArray[1] = 0;
-                system("pause>nul");
+                showHelp();
                 running = false;
                 break;
 
             case 4:
                 system("cls");
                 gotoXY(15, 5);
-                selectionArray[0] = 5;
-                selectionArray[1] = 0;
-                system("pause>nul");
+                showAbout();
                 running = false;
                 break;
 
