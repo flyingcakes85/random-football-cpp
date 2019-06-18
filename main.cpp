@@ -14,25 +14,62 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+    Contact the author : snehitsah[at]gmail[dot]com
 **/
 
 #include <bits/stdc++.h>
+#include "menuItems.h"
+#include "functionalities.h"
 
 using namespace std;
 
-int getRandomNumber()
-{
-    int theRandomNumber;
-    /**Code to generate the random number
-     * The random number is saved 
-     * in variable theRandomNumber.
-     * Function returns this number
-     **/
-
-    return theRandomNumber;
-}
-
 int main()
 {
+    int selection[2];
+    userData player;
+
+    showMenu(selection);
+
+    // Menu Handling
+    if (selection[0] == 1)
+    {
+        if (selection[1] == 1)
+        {
+            startGame(5, player);
+        }
+        else if (selection[1] == 2)
+        {
+            startGame(4, player);
+        }
+        else if (selection[1] == 3)
+        {
+            startGame(3, player);
+        }
+    }
+    else if (selection[0] == 2)
+    {
+        if (selection[1] == 1)
+        {
+            player.saveData();
+        }
+        else if (selection[1] == 2)
+        {
+            player.loadData();
+        }
+        
+    }
+
     return 0;
 }
+
+// Code to get random numbers from the function:
+// int *p;
+
+// p = getUniqueRandomNumbers(4);
+// int r[4];
+
+// for (int i = 0; i < 4; ++i)
+// {
+//     r[i] = *(p + i);
+// }
