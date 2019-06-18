@@ -122,7 +122,7 @@ public:
 
     // Return hasData
     bool HasData();
-};
+}playerData;
 // Function to input
 // user data
 void userData::input()
@@ -162,21 +162,21 @@ void userData::saveData()
     if (hasData == false)
     {
         char name[50];
-        cout << endl
-             << "Please enter a name: ";
+        gotoXY(15, 6);
+        cout << "Please enter a name: ";
         scanf(" %[^\n]s\n", name);
         setPlayerName(name);
     }
     char saveFileName[100];
     strcpy(saveFileName, "C:\\RandomFootball\\");
     strcat(saveFileName, playerName);
-    strcat(saveFileName, ".dat");
+    strcat(saveFileName, ".bin");
     ofstream savePlayerData;
-    savePlayerData.open(saveFileName, ios::binary);
-    // Function to write
-    gotoXY(20, 7);
-    cout << endl
-         << "Game data saved!";
+    savePlayerData.open(saveFileName, ios::out|ios::binary);
+    // Writing to the file
+    savePlayerData.write((char*)&playerData, sizeof(playerData));
+    gotoXY(20, 8);
+    cout << "Game data saved!";
 }
 
 // Return hasData
@@ -198,14 +198,16 @@ void userData::loadData()
      */
 addUserData:
     char name[50];
+    gotoXY(15, 6);
+    cout<<"Enter a player name: ";
     scanf(" %[^\n]s\n", name);
     setPlayerName(name);
     char loadFileName[100];
     strcpy(loadFileName, "C:\\RandomFootball\\");
     strcat(loadFileName, name);
-    strcat(loadFileName, ".dat");
+    strcat(loadFileName, ".bin");
     ifstream loadPlayerData;
-    loadPlayerData.open(loadFileName, ios::binary);
+    loadPlayerData.open(loadFileName, ios::in|ios::binary);
     if (loadPlayerData)
     {
         gotoXY(18, 7);
@@ -217,6 +219,8 @@ addUserData:
         delay(500);
         cout << ". ";
         gotoXY(18, 9);
+        // Reading from the file
+        loadPlayerData.read((char*)&playerData, sizeof(playerData));
         cout << "Saved game data loaded!";
     }
     else
@@ -231,7 +235,7 @@ addUserData:
         cout << ". ";
         gotoXY(18, 9);
         cout << "No game data saved by this name! Please retry!";
-        delay(3000);
+        delay(2000);
         system("cls");
         goto addUserData;
     }
