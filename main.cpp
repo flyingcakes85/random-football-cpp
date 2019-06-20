@@ -19,47 +19,16 @@
 **/
 
 #include <bits/stdc++.h>
-#include "menuItems.h"
+#include "handler.h"
 #include "functionalities.h"
+//#include <mmsystem.h>
 
 using namespace std;
 
 int main()
 {
-    int selection[2];
-    userData player;
-
-    showMenu(selection);
-
-    // Menu Handling
-    if (selection[0] == 1)
-    {
-        if (selection[1] == 1)
-        {
-            startGame(5, player);
-        }
-        else if (selection[1] == 2)
-        {
-            startGame(4, player);
-        }
-        else if (selection[1] == 3)
-        {
-            startGame(3, player);
-        }
-    }
-    else if (selection[0] == 2)
-    {
-        if (selection[1] == 1)
-        {
-            player.saveData();
-        }
-        else if (selection[1] == 2)
-        {
-            player.loadData();
-        }
-        
-    }
-
+    //PlaySound(TEXT("C:\\RandomFootball\\Media\\Sounds\\filename.wav"), NULL, SND_ASYNC);
+    showMenu();
     return 0;
 }
 

@@ -101,14 +101,16 @@ int checkMatch(int getno[])
 
 int startGame(int guesses, userData &player)
 {
-    cout << endl
-         << "started with " << guesses;
+    gotoXY(15, 7);
+    cout << "started with " << guesses;
 
     // Ask for name if
     // player doesn't already have
     if (player.HasData() == false)
     {
         char name[50];
+        gotoXY(20, 9);
+        cout << "Enter player's name: ";
         scanf(" %[^\n]s\n", name);
         player.setPlayerName(name);
     }
