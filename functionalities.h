@@ -22,8 +22,11 @@
 #define _FUNCTIONALITIES_
 
 #include <stdlib.h>
+#include <wincon.h>
+#include <string>
 #include <ctime>
-#include "functionalities.h"
+#include <ctype.h>
+#include "playerData.h"
 
 using namespace std;
 
@@ -46,7 +49,7 @@ int *getUniqueRandomNumbers(int size)
     for (int i = 0; i < size; ++i)
     {
         s = 0;
-        temp = rand() % 10;
+        temp = (rand() % 10) + 1;
 
         for (int j = 0; j < i; ++j)
         {
@@ -68,10 +71,14 @@ int *getUniqueRandomNumbers(int size)
 }
 
 //Generates a random number and returns
-int getRandomNumber()
+int getRandomNumber(int max)
 {
     int theRandomNumber;
 
+    // set the seed
+    srand((unsigned)time(NULL));
+
+    theRandomNumber = (rand() % max) + 1;
     return theRandomNumber;
 }
 
@@ -81,37 +88,159 @@ int checkMatch(int getno[])
 {
     // Result = 1, if any of the user inputted number matches the random number
     // Result = 0, if any of the user inputted number does not match the random number
-    int result;
+    int result = 0;
 
     //using the getRandomNumber function
     for (int i = 0; i < 5; i++)
     {
-        if (getno[i] == getRandomNumber())
+        if (getno[i] == getRandomNumber(10))
         {
             result = 1;
+            break;
         }
-        else
-        {
-            result = 0;
-        }
-
-        return result;
     }
+
+    return result;
+}
+
+int checkMatchFromArray(int choice)
+{
+    int *p;
+
+    p = getUniqueRandomNumbers(5);
+
+    int r = 1;
+
+    for (int i = 0; i < 4; ++i)
+    {
+
+        if (choice == *(p + i))
+        {
+            r = 0;
+            break;
+        }
+    }
+    return r;
+}
+
+int charToInt(char c[])
+{
+    int i = 0;
+    for (int i = 0; i < 2; ++i)
+    {
+        i += ((int)c[i]) * ((10) ^ (1 - i));
+    }
+    return i;
+}
+
+// Function to emulate
+// a toss
+// 1 = PC wins
+// 2 = User wins
+int toss()
+{
+    return getRandomNumber(2);
+}
+
+int IsNumeric(char c[])
+{
+
+    for (int i = 0; c[i] != '\0'; i++)
+    {
+        if (isalpha(c[i]) != 0)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 int startGame(int guesses, userData &player)
 {
-    cout << endl
-         << "started with " << guesses;
+    cout << endl;
 
     // Ask for name if
     // player doesn't already have
+
+    int playerGuesses[guesses];
+
     if (player.HasData() == false)
     {
         char name[50];
+        gotoXY(20, 9);
+        cout << "Enter player's name: ";
         scanf(" %[^\n]s\n", name);
         player.setPlayerName(name);
     }
+
+    cout << "\nPlease enter a game durtaion (b/w 15 and 100): ";
+    int duration, choice;
+    char cduration[2];
+    cin >> cduration;
+    for (;;)
+    {
+        if (IsNumeric(cduration) == 1)
+        {
+            cout << endl
+                 << "Please enter only numbers!" << endl
+                 << "Enter a game durtaion (b/w 15 and 100): ";
+            cin >> cduration;
+        }
+        else
+        {
+            break;
+        }
+    }
+    duration = stoi(cduration);
+
+    bool playerHasBall = false;
+    if (toss() == 2)
+    {
+        playerHasBall = true;
+    }
+
+    int playerDistanceFromGoal = 3, pcDistanceFromGoal = 3;
+
+    for (int i = 0; i < duration;)
+    {
+        if (playerHasBall = true)
+        {
+            system("cls");
+            cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
+            cout << "Enter a Number: ";
+            cin >> choice;
+            ++i;
+
+            if (checkMatchFromArray(choice) == 0)
+            {
+                --playerDistanceFromGoal;
+                ++pcDistanceFromGoal;
+            }
+            else
+            {
+                playerHasBall = false;
+            }
+        }
+        else
+        {
+            system("cls");
+            cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
+            cout << "Enter a Number: ";
+            cin >> choice;
+            ++i;
+
+            if (checkMatchFromArray(choice) == 1)
+            {
+                ++playerDistanceFromGoal;
+                --pcDistanceFromGoal;
+            }
+            else
+            {
+                playerHasBall = true;
+            }
+        }
+    }
+
     return 0;
 }
 #endif

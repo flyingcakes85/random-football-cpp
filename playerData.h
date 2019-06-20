@@ -122,7 +122,7 @@ public:
 
     // Return hasData
     bool HasData();
-};
+} player;
 // Function to input
 // user data
 void userData::input()
@@ -159,24 +159,21 @@ void userData::saveData()
      *Player Name is in the playerName variable
      */
 
-    if (hasData == false)
-    {
-        char name[50];
-        cout << endl
-             << "Please enter a name: ";
-        scanf(" %[^\n]s\n", name);
-        setPlayerName(name);
-    }
+    char playerNameForSave[50];
+    gotoXY(15, 5);
+    cout << "Please enter a name: ";
+    scanf(" %[^\n]s\n", playerNameForSave);
+    setPlayerName(playerNameForSave);
     char saveFileName[100];
     strcpy(saveFileName, "C:\\RandomFootball\\");
-    strcat(saveFileName, playerName);
+    strcat(saveFileName, playerNameForSave);
     strcat(saveFileName, ".dat");
     ofstream savePlayerData;
-    savePlayerData.open(saveFileName, ios::binary);
+    savePlayerData.open(saveFileName, ios::out|ios::binary);
     // Function to write
+    savePlayerData.write((char*)&player, sizeof(player));
     gotoXY(20, 7);
-    cout << endl
-         << "Game data saved!";
+    cout << "Game data saved!";
 }
 
 // Return hasData
@@ -197,15 +194,16 @@ void userData::loadData()
      * name has also been passed as argument
      */
 addUserData:
-    char name[50];
-    scanf(" %[^\n]s\n", name);
-    setPlayerName(name);
+    char playerNameForLoad[50];
+    gotoXY(15, 5);
+    cout << "Please enter a name: ";
+    scanf(" %[^\n]s\n", playerNameForLoad);
     char loadFileName[100];
     strcpy(loadFileName, "C:\\RandomFootball\\");
-    strcat(loadFileName, name);
+    strcat(loadFileName, playerNameForLoad);
     strcat(loadFileName, ".dat");
     ifstream loadPlayerData;
-    loadPlayerData.open(loadFileName, ios::binary);
+    loadPlayerData.open(loadFileName, ios::in|ios::binary);
     if (loadPlayerData)
     {
         gotoXY(18, 7);
@@ -217,6 +215,7 @@ addUserData:
         delay(500);
         cout << ". ";
         gotoXY(18, 9);
+        loadPlayerData.read((char*)&player, sizeof(player));
         cout << "Saved game data loaded!";
     }
     else
@@ -231,7 +230,7 @@ addUserData:
         cout << ". ";
         gotoXY(18, 9);
         cout << "No game data saved by this name! Please retry!";
-        delay(3000);
+        delay(2000);
         system("cls");
         goto addUserData;
     }
