@@ -167,7 +167,8 @@ int startGame(int guesses, userData &player)
     if (player.HasData() == false)
     {
         char name[50];
-        cout << "Please enter your name: ";
+        gotoXY(20, 9);
+        cout << "Enter player's name: ";
         scanf(" %[^\n]s\n", name);
         player.setPlayerName(name);
     }
@@ -205,7 +206,7 @@ int startGame(int guesses, userData &player)
         if (playerHasBall = true)
         {
             system("cls");
-            cout << "You are" << playerDistanceFromGoal << " steps away from goal.";
+            cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
             cout << "Enter a Number: ";
             cin >> choice;
             ++i;
@@ -222,6 +223,8 @@ int startGame(int guesses, userData &player)
         }
         else
         {
+            system("cls");
+            cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
             cout << "Enter a Number: ";
             cin >> choice;
             ++i;
