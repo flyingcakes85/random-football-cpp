@@ -24,6 +24,7 @@
 #include <windows.h>
 #include "playerData.h"
 #include "functionalities.h"
+#include "teams.h"
 
 using namespace std;
 
@@ -187,6 +188,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Easy mode!";
+                            player.selectTeam();
+                            goto mainMenu;
                             startGame(5, player);
                             playing = false;
                             break;
@@ -195,6 +198,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Intermediate mode!";
+                            player.selectTeam();
+                            goto mainMenu;
                             startGame(4, player);
                             playing = false;
                             break;
@@ -203,6 +208,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Difficult mode!";
+                            player.selectTeam();
+                            goto mainMenu;
                             startGame(3, player);
                             playing = false;
                             break;

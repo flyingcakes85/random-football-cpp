@@ -84,6 +84,9 @@ class userData
     // Power-up database
     powerups playerPowerUp;
 
+    // Player's selected team
+    char myTeam[50];
+
     // Checks if class
     // has data
     bool hasData;
@@ -120,6 +123,12 @@ public:
     // Function to update playerName
     void setPlayerName(char name[]);
 
+    // Function to select team
+    void selectTeam();
+
+    // Function to set team
+    void setTeam(char mySelectedTeam[50]);
+
     // Return hasData
     bool HasData();
 } player;
@@ -144,6 +153,12 @@ void userData::setPlayerName(char name[])
 {
     strcpy(playerName, name);
     hasData = true;
+}
+
+// Function to set Player's Team
+void userData::setTeam(char mySelectedTeam[50])
+{
+    strcpy(myTeam, mySelectedTeam);
 }
 
 // Function to save user
