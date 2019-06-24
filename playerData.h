@@ -26,8 +26,12 @@
 
 using namespace std;
 
-//Function for time delay
-//Accepts argumant in milliseconds
+/**
+ * This file contains the class and member functions
+ * to handle various operations dealing with the user profile
+ */
+
+//Function for delay
 void delay(unsigned int mseconds)
 {
     clock_t goal = mseconds + clock();
@@ -46,8 +50,7 @@ void gotoXY(int x, int y)
     SetConsoleCursorPosition(console, CP);
 }
 
-// Structure to hold variables
-// for various power-ups
+// Structure to hold variables for various power-ups
 struct powerups
 {
     // Power-up to allow player to
@@ -67,6 +70,7 @@ struct powerups
     int skipTheToss;
 };
 
+// The main class, that stores all data and contains the member functions
 class userData
 {
     // Variable to store score
@@ -84,14 +88,18 @@ class userData
     // Power-up database
     powerups playerPowerUp;
 
-    // Checks if class
-    // has data
+    // Player's selected team
+    char myTeam[50];
+
+    // Checks if class has data
     bool hasData;
 
 public:
     // Default Constructor
     userData()
     {
+        // Initialize all variables
+
         score[0] = 0;
         score[1] = 0;
         score[2] = 0;
@@ -104,11 +112,9 @@ public:
 
         hasData = false;
     }
+
     //Function to input player's data
     void input();
-
-    //Function to update coins
-    void updateCoins(int c);
 
     // Function to return pointer
     // to the playerName array
@@ -123,9 +129,30 @@ public:
     // Function to update playerName
     void setPlayerName(char name[]);
 
+    // Function to return PowerUp count
+    powerups returnPowerUp();
+
+    // Function to update PowerUp Data
+    void updatePowerUp(int choice);
+
+    // Function to update coins
+    // or the virtual money
+    void updateCoins(int choice);
+
+    // Function to return coins
+    // or the virtual money
+    long int returnCoins();
+
+    // Function to select team
+    void selectTeam();
+
+    // Function to set team
+    void setTeam(char mySelectedTeam[50]);
+
     // Return hasData
     bool HasData();
 } player;
+
 // Function to input
 // user data
 void userData::input()
@@ -142,9 +169,102 @@ const char *userData::getPlayerName() const
     return playerName;
 }
 
-void userData::updateCoins(int c)
+// Function to update playerName
+void userData::setPlayerName(char name[])
 {
-    this->coins += c;
+    strcpy(playerName, name);
+    hasData = true;
+}
+
+// Function to set Player's Team
+void userData::setTeam(char mySelectedTeam[50])
+{
+    strcpy(myTeam, mySelectedTeam);
+}
+
+// Function to return PowerUp count
+powerups userData::returnPowerUp()
+{
+    return playerPowerUp;
+}
+
+// Function to update PowerUp data
+void userData::updatePowerUp(int choice)
+{
+    if (choice == 1)
+    {
+        playerPowerUp.skipTheToss += 5;
+    }
+    if (choice == 2)
+    {
+        playerPowerUp.lucky8 += 5;
+    }
+    if (choice == 3)
+    {
+        playerPowerUp.longShot += 5;
+    }
+}
+
+// Function to return coins
+// or the virtual money
+long int userData::returnCoins()
+{
+    return coins;
+}
+
+// Function to update coins
+// or the virtual money
+void userData::updateCoins(int choice)
+{
+    if (choice == 1)
+    {
+        coins -= 500;
+    }
+    if (choice == 2)
+    {
+        coins -= 1000;
+    }
+    if (choice == 3)
+    {
+        coins -= 1500;
+    }
+}
+
+// Function to save user
+// data on the disk
+void userData::saveData()
+{
+    system("cls");
+    /**
+     * Function to save data
+     * from the class &u (passed as argument)
+     * to a file in binary format
+     * Save file location should be:
+     * C:\RandomFootball\[playerName].dat
+     *
+     *Player Name is in the playerName variable
+     */
+
+    char playerNameForSave[50];
+    if (hasData == false)
+    {
+        gotoXY(15, 5);
+        cout << "Please enter a name: ";
+        scanf(" %[^\n]s\n", playerNameForSave);
+        setPlayerName(playerNameForSave);
+    }
+    strcpy(playerNameForSave, getPlayerName());
+    char saveFileName[100];
+    strcpy(saveFileName, "C:\\RandomFootball\\");
+    strcat(saveFileName, playerNameForSave);
+    strcat(saveFileName, ".dat");
+    ofstream savePlayerData;
+    savePlayerData.open(saveFileName, ios::out | ios::binary);
+    // Function to write
+    savePlayerData.write((char *)&player, sizeof(player));
+    gotoXY(20, 7);
+    cout << "Game data saved!" << endl
+         << "Please press enter to continue...";
 }
 
 // Return hasData
@@ -153,11 +273,65 @@ bool userData::HasData()
     return hasData;
 }
 
-// Function to update playerName
-void userData::setPlayerName(char name[])
+// Function to load user
+// data from the disk
+void userData::loadData()
 {
-    strcpy(playerName, name);
-    hasData = true;
+    system("cls");
+/**Function to load data
+     * from the file at :
+     * C:\RandomFootball\[name].dat
+     * to the class u passed as argument
+     *
+     * name has also been passed as argument
+     */
+addUserData:
+    char playerNameForLoad[50];
+    if (hasData == false)
+    {
+        gotoXY(15, 5);
+        cout << "Please enter a name: ";
+        scanf(" %[^\n]s\n", playerNameForLoad);
+        setPlayerName(playerNameForLoad);
+    }
+    strcpy(playerNameForLoad, getPlayerName());
+    char loadFileName[100];
+    strcpy(loadFileName, "C:\\RandomFootball\\");
+    strcat(loadFileName, playerNameForLoad);
+    strcat(loadFileName, ".dat");
+    ifstream loadPlayerData;
+    loadPlayerData.open(loadFileName, ios::in | ios::binary);
+    if (loadPlayerData)
+    {
+        gotoXY(18, 7);
+        cout << "Loading game data ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        gotoXY(18, 9);
+        loadPlayerData.read((char *)&player, sizeof(player));
+        cout << "Saved game data loaded!" << endl
+             << "Please press enter to continue...";
+    }
+    else
+    {
+        gotoXY(18, 7);
+        cout << "Loading game data ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        delay(500);
+        cout << ". ";
+        gotoXY(18, 9);
+        cout << "No game data saved by this name! Please retry!";
+        delay(2000);
+        system("cls");
+        goto addUserData;
+    }
 }
 
 #endif

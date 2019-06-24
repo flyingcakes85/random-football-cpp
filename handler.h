@@ -18,20 +18,19 @@
     Contact the author : snehitsah[at]gmail[dot]com
 **/
 
-#ifndef _MENUTEMS_
-#define _MENUTEMS_
+#ifndef _HANDLER_
+#define _HANDLER_
 
 #include <windows.h>
 #include "playerData.h"
 #include "functionalities.h"
+#include "teams.h"
 
 using namespace std;
 
 /**
  * This header file contains most of the funcitons
  * that are used to build the menus.
- *
- *
  *
  * The possible menu selections are:
  *
@@ -74,13 +73,31 @@ void showMenu()
 {
 mainMenu:
     system("cls");
-    /**Code to print a menu with following options:
+    /**
+     * Code to print a menu with following options:
      * 1. Start Game
      * 2. Load/Save Data
      * 3. Store
      * 4. Help
      * 5. About
      */
+
+    cout << endl
+         << "    ____  ___    _   ______  ____  __  ___   __________  ____  __________  ___    __    __ ";
+    cout << endl
+         << "   / __ \\/   |  / | / / __ \\/ __ \\/  |/  /  / ____/ __ \\/ __ \\/_  __/ __ )/   |  / /   / / ";
+    cout << endl
+         << "  / /_/ / /| | /  |/ / / / / / / / /|_/ /  / /_  / / / / / / / / / / __  / /| | / /   / /  ";
+    cout << endl
+         << " / _, _/ ___ |/ /|  / /_/ / /_/ / /  / /  / __/ / /_/ / /_/ / / / / /_/ / ___ |/ /___/ /___";
+    cout << endl
+         << "/_/ |_/_/  |_/_/ |_/_____/\\____/_/  /_/  /_/    \\____/\\____/ /_/ /_____/_/  |_/_____/_____/";
+
+    powerups playerPowerUp;
+    playerPowerUp = player.returnPowerUp();
+
+    long int playerCoins;
+    playerCoins = player.returnCoins();
 
     bool running = true;
     int x = 6, menuItem = 0;
@@ -94,45 +111,45 @@ mainMenu:
     bool buyPowerups = true;
     int a = 6, powerupItem = 0;
 
-    gotoXY(15, 4);
+    gotoXY(15, 7);
     cout << "MAIN MENU! Select an option below: ";
-    gotoXY(16, 6);
+    gotoXY(16, 9);
     cout << "->";
 
     while (running)
     {
-        gotoXY(20, 6);
-        cout << "1.     Start Game";
-        gotoXY(20, 7);
-        cout << "2.     Load/Save Game";
-        gotoXY(20, 8);
-        cout << "3.     Store";
         gotoXY(20, 9);
-        cout << "4.     Help";
+        cout << "1.     Start Game";
         gotoXY(20, 10);
-        cout << "5.     About";
+        cout << "2.     Load/Save Game";
         gotoXY(20, 11);
+        cout << "3.     Store";
+        gotoXY(20, 12);
+        cout << "4.     Help";
+        gotoXY(20, 13);
+        cout << "5.     About";
+        gotoXY(20, 14);
         cout << "6.     Exit";
         system("pause>nul");
 
         if (GetAsyncKeyState(VK_DOWN) && x != 11)
         {
-            gotoXY(16, x);
-            gotoXY(16, x);
+            gotoXY(16, x+3);
+            gotoXY(16, x+3);
             cout << "  ";
             x++;
-            gotoXY(16, x);
+            gotoXY(16, x+3);
             cout << "->";
             menuItem++;
             continue;
         }
         if (GetAsyncKeyState(VK_UP) && x != 6)
         {
-            gotoXY(16, x);
-            gotoXY(16, x);
+            gotoXY(16, x+3);
+            gotoXY(16, x+3);
             cout << "  ";
             x--;
-            gotoXY(16, x);
+            gotoXY(16, x+3);
             cout << "->";
             menuItem--;
             continue;
@@ -187,7 +204,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Easy mode!";
-                            startGame(6, player);
+                            player.selectTeam();
+                            startGame(5, player);
                             playing = false;
                             break;
 
@@ -195,7 +213,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Intermediate mode!";
-                            startGame(5, player);
+                            player.selectTeam();
+                            startGame(4, player);
                             playing = false;
                             break;
 
@@ -203,7 +222,8 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Difficult mode!";
-                            startGame(4, player);
+                            player.selectTeam();
+                            startGame(3, player);
                             playing = false;
                             break;
                         }
@@ -227,6 +247,10 @@ mainMenu:
                     gotoXY(20, 7);
                     cout << "2.   Load game data";
                     system("pause>nul");
+                    if (GetAsyncKeyState(VK_BACK))
+                    {
+                        goto mainMenu;
+                    }
                     if (GetAsyncKeyState(VK_DOWN) && z != 7)
                     {
                         gotoXY(16, z);
@@ -254,7 +278,6 @@ mainMenu:
                         switch (loadSaveItem)
                         {
                         case 0:
-                            system("cls");
                             gotoXY(15, 5);
                             cout << "Saving game data!";
                             player.saveData();
@@ -264,7 +287,6 @@ mainMenu:
                             break;
 
                         case 1:
-                            system("cls");
                             gotoXY(15, 5);
                             cout << "Loading game data!";
                             player.loadData();
@@ -282,19 +304,37 @@ mainMenu:
             case 2:
                 system("cls");
 
-                gotoXY(15, 5);
+                gotoXY(15, 4);
                 cout << "Welcome to the store! Select PowerUp to buy: ";
+                gotoXY(98, 4);
+                cout << "Your coins: " << playerCoins;
                 gotoXY(16, 6);
                 cout << "->";
                 while (buyPowerups)
                 {
                     gotoXY(20, 6);
                     cout << "1.   Skip The Toss";
+                    gotoXY(39, 6);
+                    cout << "(You have: " << playerPowerUp.skipTheToss << ")";
+                    gotoXY(75, 6);
+                    cout << "Coins Needed Per Five Items: 500";
                     gotoXY(20, 7);
                     cout << "2.   Lucky '8'";
+                    gotoXY(39, 7);
+                    cout << "(You have: " << playerPowerUp.lucky8 << ")";
+                    gotoXY(75, 7);
+                    cout << "Coins Needed Per Five Items: 1000";
                     gotoXY(20, 8);
                     cout << "3.   Long Shot";
+                    gotoXY(39, 8);
+                    cout << "(You have: " << playerPowerUp.longShot << ")";
+                    gotoXY(75, 8);
+                    cout << "Coins Needed Per Five Items: 1500";
                     system("pause>nul");
+                    if (GetAsyncKeyState(VK_BACK))
+                    {
+                        goto mainMenu;
+                    }
                     if (GetAsyncKeyState(VK_DOWN) && a != 8)
                     {
                         gotoXY(16, a);
@@ -325,8 +365,53 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to skip the toss!";
+                            gotoXY(40, 8);
+                            cout << "CONFIRMATION!";
+                            gotoXY(25, 9);
+                            cout << "Are you sure you want to buy this power up?";
+                            gotoXY(38, 10);
+                            cout << "Yes(Y)      No(N)";
                             system("pause>nul");
-                            goto mainMenu;
+                            if (GetAsyncKeyState(0x59))
+                            {
+                                if (playerCoins >= 500)
+                                {
+                                    playerPowerUp.skipTheToss += 5;
+                                    playerCoins -= 500;
+                                    player.updateCoins(1);
+                                    player.updatePowerUp(1);
+                                    gotoXY(24, 12);
+                                    cout << "Contacting store server. ";
+                                    delay(1000);
+                                    cout << "Processing your item. ";
+                                    delay(1000);
+                                    cout << "Buying ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    gotoXY(20, 15);
+                                    cout << "Thank you for visiting the store. 5x PowerUps: Skip The Toss added!";
+                                    system("pause>nul");
+                                    player.saveData();
+                                    goto mainMenu;
+                                }
+                                else
+                                {
+                                    gotoXY(20, 15);
+                                    cout << "Not enough coins! Collect more to buy this PowerUp!";
+                                    system("pause>nul");
+                                    goto mainMenu;
+                                }
+                            }
+                            else if (GetAsyncKeyState(0x4E))
+                            {
+                                goto mainMenu;
+                            }
+                            system("pause>nul");
                             buyPowerups = false;
                             break;
 
@@ -334,8 +419,53 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to be lucky!";
+                            gotoXY(40, 8);
+                            cout << "CONFIRMATION!";
+                            gotoXY(25, 9);
+                            cout << "Are you sure you want to buy this power up?";
+                            gotoXY(38, 10);
+                            cout << "Yes(Y)      No(N)";
                             system("pause>nul");
-                            goto mainMenu;
+                            if (GetAsyncKeyState(0x59))
+                            {
+                                if (playerCoins >= 1000)
+                                {
+                                    playerPowerUp.lucky8 += 5;
+                                    playerCoins -= 1000;
+                                    player.updateCoins(2);
+                                    player.updatePowerUp(2);
+                                    gotoXY(24, 12);
+                                    cout << "Contacting store server. ";
+                                    delay(1000);
+                                    cout << "Processing your item. ";
+                                    delay(1000);
+                                    cout << "Buying ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    gotoXY(20, 15);
+                                    cout << "Thank you for visiting the store. 5x PowerUps: Lucky '8' added!";
+                                    system("pause>nul");
+                                    player.saveData();
+                                    goto mainMenu;
+                                }
+                                else
+                                {
+                                    gotoXY(20, 15);
+                                    cout << "Not enough coins! Collect more to buy this PowerUp!";
+                                    system("pause>nul");
+                                    goto mainMenu;
+                                }
+                            }
+                            else if (GetAsyncKeyState(0x4E))
+                            {
+                                goto mainMenu;
+                            }
+                            system("pause>nul");
                             buyPowerups = false;
                             break;
 
@@ -343,8 +473,53 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose to take a long shot!";
+                            gotoXY(40, 8);
+                            cout << "CONFIRMATION!";
+                            gotoXY(25, 9);
+                            cout << "Are you sure you want to buy this power up?";
+                            gotoXY(38, 10);
+                            cout << "Yes(Y)      No(N)";
                             system("pause>nul");
-                            goto mainMenu;
+                            if (GetAsyncKeyState(0x59))
+                            {
+                                if (playerCoins >= 1500)
+                                {
+                                    playerPowerUp.longShot += 5;
+                                    playerCoins -= 1500;
+                                    player.updateCoins(3);
+                                    player.updatePowerUp(3);
+                                    gotoXY(24, 12);
+                                    cout << "Contacting store server. ";
+                                    delay(1000);
+                                    cout << "Processing your item. ";
+                                    delay(1000);
+                                    cout << "Buying ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    cout << ". ";
+                                    delay(500);
+                                    gotoXY(20, 15);
+                                    cout << "Thank you for visiting the store. 5x PowerUps: LongShot added!";
+                                    system("pause>nul");
+                                    player.saveData();
+                                    goto mainMenu;
+                                }
+                                else
+                                {
+                                    gotoXY(20, 15);
+                                    cout << "Not enough coins! Collect more to buy this PowerUp!";
+                                    system("pause>nul");
+                                    goto mainMenu;
+                                }
+                            }
+                            else if (GetAsyncKeyState(0x4E))
+                            {
+                                goto mainMenu;
+                            }
+                            system("pause>nul");
                             buyPowerups = false;
                             break;
                         }

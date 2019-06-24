@@ -115,6 +115,9 @@ int checkMatchFromArray(int choice, int amt)
     {
         return 0;
     }
+    else if(choice == 98){
+        return 1;
+    }
 
     int *p;
 
@@ -237,15 +240,17 @@ int startGame(int guesses, userData &player)
     {
         cout << endl
              << "PC won the toss!" << endl
-             << "PC have the ball";
+             << "PC has the ball";
         playerHasBall = false;
     }
+    cout << endl
+         << "Please wait...";
     delay(1500);
 
     system("cls");
 
     //Starting the actual game
-    int playerDistanceFromGoal = 3, pcDistanceFromGoal = 3;
+    int playerDistanceFromGoal = 3;
     score[0] = 0;
     score[1] = 0;
     bool increment;
@@ -275,7 +280,6 @@ int startGame(int guesses, userData &player)
                 else
                 {
                     cout << "Goal saved by PC";
-                    playerHasBall = false;
                     goto endOfLoop;
                 }
             }
@@ -284,11 +288,10 @@ int startGame(int guesses, userData &player)
             cin >> choice;
             ++i;
             increment = true;
-            
+
             if (checkMatchFromArray(choice, guesses) == 0)
             {
                 --playerDistanceFromGoal;
-                ++pcDistanceFromGoal;
             }
             else
             {
@@ -298,7 +301,28 @@ int startGame(int guesses, userData &player)
         else
         {
             system("cls");
-            cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
+
+            if (playerDistanceFromGoal == 6)
+            {
+                cout << "PC will now shoot a goal!" << endl;
+                cout << "Enter a number: ";
+                cin >> choice;
+                playerHasBall = true;
+
+                if (checkMatchFromArray(choice, guesses) == 0)
+                {
+                    cout << "Thats a goal!";
+                    ++score[0];
+                    goto endOfLoop;
+                }
+                else
+                {
+                    cout << "You saved the goal!";
+                    goto endOfLoop;
+                }
+            }
+
+            cout << "PC is " << (6-playerDistanceFromGoal) << " steps away from goal.\n\n";
             cout << "Enter a Number: ";
             cin >> choice;
             ++i;
@@ -306,7 +330,6 @@ int startGame(int guesses, userData &player)
             if (checkMatchFromArray(choice, guesses) == 1)
             {
                 ++playerDistanceFromGoal;
-                --pcDistanceFromGoal;
             }
             else
             {
@@ -321,7 +344,7 @@ int startGame(int guesses, userData &player)
         }
         cout << "\n\n\n\nEnd of loop " << i;
         delay(1000);
-
-        return 0;
     }
+    return 0;
+}
 #endif
