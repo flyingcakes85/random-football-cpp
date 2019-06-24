@@ -115,7 +115,8 @@ int checkMatchFromArray(int choice, int amt)
     {
         return 0;
     }
-    else if(choice == 98){
+    else if (choice == 98)
+    {
         return 1;
     }
 
@@ -258,11 +259,26 @@ int startGame(int guesses, userData &player)
     delay(3000);
     for (int i = 0; i < duration;)
     {
+        system("cls");
+
         increment = false;
+
+        // Print the score
+        cout << "Current score" << endl
+             << "PC : " << score[1] << endl
+             << "You : " << score[0] << endl;
 
         if (playerHasBall == true)
         {
-            system("cls");
+            cout << "\nYou have the ball\n";
+        }
+        else
+        {
+            cout << "\nPC has the ball";
+        }
+
+        if (playerHasBall == true)
+        {
 
             if (playerDistanceFromGoal == 0)
             {
@@ -322,7 +338,7 @@ int startGame(int guesses, userData &player)
                 }
             }
 
-            cout << "PC is " << (6-playerDistanceFromGoal) << " steps away from goal.\n\n";
+            cout << "PC is " << (6 - playerDistanceFromGoal) << " steps away from goal.\n\n";
             cout << "Enter a Number: ";
             cin >> choice;
             ++i;
