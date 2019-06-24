@@ -123,6 +123,20 @@ public:
     // Function to update playerName
     void setPlayerName(char name[]);
 
+    // Function to return PowerUp count
+    powerups returnPowerUp();
+
+    // Function to update PowerUp Data
+    void updatePowerUp(int choice);
+
+    // Function to update coins
+    // or the virtual money
+    void updateCoins(int choice);
+
+    // Function to return coins
+    // or the virtual money
+    long int returnCoins();
+
     // Function to select team
     void selectTeam();
 
@@ -161,10 +175,59 @@ void userData::setTeam(char mySelectedTeam[50])
     strcpy(myTeam, mySelectedTeam);
 }
 
+// Function to return PowerUp count
+powerups userData::returnPowerUp()
+{
+    return playerPowerUp;
+}
+
+// Function to update PowerUp data
+void userData::updatePowerUp(int choice)
+{
+    if(choice == 1)
+    {
+        playerPowerUp.skipTheToss+=5;
+    }
+    if(choice == 2)
+    {
+        playerPowerUp.lucky8+=5;
+    }
+    if(choice == 3)
+    {
+        playerPowerUp.longShot+=5;
+    }
+}
+
+// Function to return coins
+// or the virtual money
+long int userData::returnCoins()
+{
+    return coins;
+}
+
+// Function to update coins
+// or the virtual money
+void userData::updateCoins(int choice)
+{
+    if(choice == 1)
+    {
+        coins-=500;
+    }
+    if(choice == 2)
+    {
+        coins-=1000;
+    }
+    if(choice == 3)
+    {
+        coins-=1500;
+    }
+}
+
 // Function to save user
 // data on the disk
 void userData::saveData()
 {
+    system("cls");
     /**Function to save data
      * from the class &u (passed as argument)
      * to a file in binary format
@@ -175,10 +238,14 @@ void userData::saveData()
      */
 
     char playerNameForSave[50];
+    if(hasData == false)
+    {
     gotoXY(15, 5);
     cout << "Please enter a name: ";
     scanf(" %[^\n]s\n", playerNameForSave);
     setPlayerName(playerNameForSave);
+    }
+    strcpy(playerNameForSave, getPlayerName());
     char saveFileName[100];
     strcpy(saveFileName, "C:\\RandomFootball\\");
     strcat(saveFileName, playerNameForSave);
@@ -201,6 +268,7 @@ bool userData::HasData()
 // data from the disk
 void userData::loadData()
 {
+    system("cls");
 /**Function to load data
      * from the file at :
      * C:\RandomFootball\[name].dat
@@ -210,9 +278,14 @@ void userData::loadData()
      */
 addUserData:
     char playerNameForLoad[50];
+    if(hasData == false)
+    {
     gotoXY(15, 5);
     cout << "Please enter a name: ";
     scanf(" %[^\n]s\n", playerNameForLoad);
+    setPlayerName(playerNameForLoad);
+    }
+    strcpy(playerNameForLoad, getPlayerName());
     char loadFileName[100];
     strcpy(loadFileName, "C:\\RandomFootball\\");
     strcat(loadFileName, playerNameForLoad);
