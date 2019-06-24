@@ -18,8 +18,8 @@
     Contact the author : snehitsah[at]gmail[dot]com
 **/
 
-#ifndef _MENUTEMS_
-#define _MENUTEMS_
+#ifndef _HANDLER_
+#define _HANDLER_
 
 #include <windows.h>
 #include "playerData.h"
