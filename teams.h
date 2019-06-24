@@ -1608,69 +1608,71 @@ void userData::selectTeam()
                 while (selectingTeamLeague6)
                 {
                     gotoXY(20, 6);
-                    cout << "1.   Australia";
+                    cout << "1.   Argentina";
+                    gotoXY(20, 6);
+                    cout << "2.   Australia";
                     gotoXY(20, 7);
-                    cout << "2.   Belgium";
+                    cout << "3.   Belgium";
                     gotoXY(20, 8);
-                    cout << "3.   Brazil";
+                    cout << "4.   Brazil";
                     gotoXY(20, 9);
-                    cout << "4.   Colombia";
+                    cout << "5.   Colombia";
                     gotoXY(20, 10);
-                    cout << "5.   Costa Rica";
+                    cout << "6.   Costa Rica";
                     gotoXY(20, 11);
-                    cout << "6.   Croatia";
+                    cout << "7.   Croatia";
                     gotoXY(20, 12);
-                    cout << "7.   Czechia";
+                    cout << "8.   Czechia";
                     gotoXY(20, 13);
-                    cout << "8.   England";
+                    cout << "9.   England";
                     gotoXY(20, 14);
-                    cout << "9.   France";
+                    cout << "10.   France";
                     gotoXY(20, 15);
-                    cout << "10.  Germany";
+                    cout << "11.  Germany";
                     gotoXY(20, 16);
-                    cout << "11.  Ghana";
+                    cout << "12.  Ghana";
                     gotoXY(20, 17);
-                    cout << "12.  Hungary";
+                    cout << "13.  Hungary";
                     gotoXY(20, 18);
-                    cout << "13.  Iran";
+                    cout << "14.  Iran";
                     gotoXY(20, 19);
-                    cout << "14.  Israel";
+                    cout << "15.  Israel";
                     gotoXY(20, 20);
-                    cout << "15.  Italy";
+                    cout << "16.  Italy";
                     gotoXY(20, 21);
-                    cout << "16.  Kosovo";
+                    cout << "17.  Kosovo";
                     gotoXY(20, 22);
-                    cout << "17.  Mexico";
+                    cout << "18.  Mexico";
                     gotoXY(20, 23);
-                    cout << "18.  Montenegro";
+                    cout << "19.  Montenegro";
                     gotoXY(20, 24);
-                    cout << "19.  Netherlands";
+                    cout << "20.  Netherlands";
                     gotoXY(20, 25);
-                    cout << "20.  Nigeria";
+                    cout << "21.  Nigeria";
                     gotoXY(20, 26);
-                    cout << "21.  Northern Ireland";
+                    cout << "22.  Northern Ireland";
                     gotoXY(20, 27);
-                    cout << "22.  Paraguay";
+                    cout << "23.  Paraguay";
                     gotoXY(20, 28);
-                    cout << "23.  Peru";
+                    cout << "24.  Peru";
                     gotoXY(20, 29);
-                    cout << "24.  Portugal";
+                    cout << "25.  Portugal";
                     gotoXY(20, 30);
-                    cout << "25.  Romania";
+                    cout << "26.  Romania";
                     gotoXY(20, 31);
-                    cout << "26.  Scotland";
+                    cout << "27.  Scotland";
                     gotoXY(20, 32);
-                    cout << "27.  South Korea";
+                    cout << "28.  South Korea";
                     gotoXY(20, 33);
-                    cout << "28.  Spain";
+                    cout << "29.  Spain";
                     gotoXY(20, 34);
-                    cout << "29.  Sweden";
+                    cout << "30.  Sweden";
                     gotoXY(20, 35);
-                    cout << "30.  Uruguay";
+                    cout << "31.  Uruguay";
                     gotoXY(20, 36);
-                    cout << "31.  Wales";
+                    cout << "32.  Wales";
                     system("pause>nul");
-                    if (GetAsyncKeyState(VK_DOWN) && t6 != 36)
+                    if (GetAsyncKeyState(VK_DOWN) && t6 != 37)
                     {
                         gotoXY(16, t6);
                         gotoXY(16, t6);
@@ -1699,13 +1701,21 @@ void userData::selectTeam()
                         case 0:
                             system("cls");
                             gotoXY(15, 5);
+                            cout << "You chose Argentina!";
+                            strcpy(mySelectedTeam, "Argentina");
+                            setTeam(mySelectedTeam);
+                            selectingTeamLeague6 = false;
+                            break;
+                        case 1:
+                            system("cls");
+                            gotoXY(15, 5);
                             cout << "You chose Australia!";
                             strcpy(mySelectedTeam, "Australia");
                             setTeam(mySelectedTeam);
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 1:
+                        case 2:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Belgium!";
@@ -1714,7 +1724,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 2:
+                        case 3:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Brazil!";
@@ -1723,7 +1733,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 3:
+                        case 4:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Colombia!";
@@ -1732,7 +1742,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 4:
+                        case 5:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Costa Rica!";
@@ -1741,7 +1751,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 5:
+                        case 6:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Croatia!";
@@ -1750,7 +1760,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 6:
+                        case 7:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Czechia!";
@@ -1759,7 +1769,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 7:
+                        case 8:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose England!";
@@ -1768,7 +1778,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 8:
+                        case 9:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose France!";
@@ -1777,7 +1787,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 9:
+                        case 10:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Germany!";
@@ -1786,7 +1796,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 10:
+                        case 11:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Ghana!";
@@ -1795,7 +1805,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 11:
+                        case 12:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Hungary!";
@@ -1804,7 +1814,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 12:
+                        case 13:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Iran!";
@@ -1813,7 +1823,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 13:
+                        case 14:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Israel!";
@@ -1822,7 +1832,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 14:
+                        case 15:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Italy!";
@@ -1831,7 +1841,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 15:
+                        case 16:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Kosovo!";
@@ -1840,7 +1850,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 16:
+                        case 17:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Mexico!";
@@ -1849,7 +1859,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 17:
+                        case 18:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Montenegro!";
@@ -1858,7 +1868,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 18:
+                        case 19:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Netherlands!";
@@ -1867,7 +1877,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 19:
+                        case 20:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Nigeria!";
@@ -1876,7 +1886,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 20:
+                        case 21:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Northern Ireland!";
@@ -1885,7 +1895,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 21:
+                        case 22:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Paraguay!";
@@ -1894,7 +1904,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 22:
+                        case 23:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Peru!";
@@ -1903,7 +1913,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 23:
+                        case 24:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Portugal!";
@@ -1912,7 +1922,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 24:
+                        case 25:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Romania!";
@@ -1921,7 +1931,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 25:
+                        case 26:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Scotland!";
@@ -1930,7 +1940,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 26:
+                        case 27:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose South Korea!";
@@ -1939,7 +1949,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 27:
+                        case 28:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Spain!";
@@ -1948,7 +1958,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 28:
+                        case 29:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Sweden!";
@@ -1957,7 +1967,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 29:
+                        case 30:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Uruguay!";
@@ -1966,7 +1976,7 @@ void userData::selectTeam()
                             selectingTeamLeague6 = false;
                             break;
 
-                        case 30:
+                        case 31:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "You chose Wales!";
