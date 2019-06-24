@@ -263,8 +263,8 @@ void userData::saveData()
     // Function to write
     savePlayerData.write((char *)&player, sizeof(player));
     gotoXY(20, 7);
-    cout << "Game data saved!" << endl
-         << "Please press enter to continue...";
+    cout << "Game data saved!"<<endl;
+    system("pause");
 }
 
 // Return hasData
@@ -313,8 +313,8 @@ addUserData:
         cout << ". ";
         gotoXY(18, 9);
         loadPlayerData.read((char *)&player, sizeof(player));
-        cout << "Saved game data loaded!" << endl
-             << "Please press enter to continue...";
+        cout << "Saved game data loaded!"<<endl;
+        system("pause");
     }
     else
     {

@@ -20,6 +20,7 @@
 
 #include <bits/stdc++.h>
 #include "handler.h"
+#include <conio.h>
 #include "functionalities.h"
 //#include <mmsystem.h>
 
@@ -28,7 +29,7 @@ using namespace std;
 int main()
 {
     //PlaySound(TEXT("C:\\RandomFootball\\Media\\Sounds\\filename.wav"), NULL, SND_ASYNC);
-    showMenu();                                                                                
+    showMenu();
     return 0;
 }
 

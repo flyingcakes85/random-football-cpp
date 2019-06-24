@@ -311,13 +311,13 @@ int startGame(int guesses, userData &player)
 
                 if (checkMatchFromArray(choice, guesses) == 0)
                 {
-                    cout << "Thats a goal!";
-                    ++score[0];
+                    cout << "You saved the goal!";
+                    ++score[1];
                     goto endOfLoop;
                 }
                 else
                 {
-                    cout << "You saved the goal!";
+                    cout << "PC scored a goal!";
                     goto endOfLoop;
                 }
             }
