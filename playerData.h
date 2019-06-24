@@ -26,7 +26,8 @@
 
 using namespace std;
 
-//Function for delay
+//Function for time delay
+//Accepts argumant in milliseconds
 void delay(unsigned int mseconds)
 {
     clock_t goal = mseconds + clock();
@@ -77,7 +78,6 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
-
     // Coins, or the virtual money
     long int coins;
 
@@ -106,6 +106,9 @@ public:
     }
     //Function to input player's data
     void input();
+
+    //Function to update coins
+    void updateCoins(int c);
 
     // Function to return pointer
     // to the playerName array
@@ -139,41 +142,9 @@ const char *userData::getPlayerName() const
     return playerName;
 }
 
-// Function to update playerName
-void userData::setPlayerName(char name[])
+void userData::updateCoins(int c)
 {
-    strcpy(playerName, name);
-    hasData = true;
-}
-
-// Function to save user
-// data on the disk
-void userData::saveData()
-{
-    /**Function to save data
-     * from the class &u (passed as argument)
-     * to a file in binary format
-     * Save file location should be:
-     * C:\RandomFootball\[playerName].dat
-     *
-     *Player Name is in the playerName variable
-     */
-
-    char playerNameForSave[50];
-    gotoXY(15, 5);
-    cout << "Please enter a name: ";
-    scanf(" %[^\n]s\n", playerNameForSave);
-    setPlayerName(playerNameForSave);
-    char saveFileName[100];
-    strcpy(saveFileName, "C:\\RandomFootball\\");
-    strcat(saveFileName, playerNameForSave);
-    strcat(saveFileName, ".dat");
-    ofstream savePlayerData;
-    savePlayerData.open(saveFileName, ios::out|ios::binary);
-    // Function to write
-    savePlayerData.write((char*)&player, sizeof(player));
-    gotoXY(20, 7);
-    cout << "Game data saved!";
+    this->coins += c;
 }
 
 // Return hasData
@@ -182,58 +153,11 @@ bool userData::HasData()
     return hasData;
 }
 
-// Function to load user
-// data from the disk
-void userData::loadData()
+// Function to update playerName
+void userData::setPlayerName(char name[])
 {
-/**Function to load data
-     * from the file at :
-     * C:\RandomFootball\[name].dat
-     * to the class u passed as argument
-     *
-     * name has also been passed as argument
-     */
-addUserData:
-    char playerNameForLoad[50];
-    gotoXY(15, 5);
-    cout << "Please enter a name: ";
-    scanf(" %[^\n]s\n", playerNameForLoad);
-    char loadFileName[100];
-    strcpy(loadFileName, "C:\\RandomFootball\\");
-    strcat(loadFileName, playerNameForLoad);
-    strcat(loadFileName, ".dat");
-    ifstream loadPlayerData;
-    loadPlayerData.open(loadFileName, ios::in|ios::binary);
-    if (loadPlayerData)
-    {
-        gotoXY(18, 7);
-        cout << "Loading game data ";
-        delay(500);
-        cout << ". ";
-        delay(500);
-        cout << ". ";
-        delay(500);
-        cout << ". ";
-        gotoXY(18, 9);
-        loadPlayerData.read((char*)&player, sizeof(player));
-        cout << "Saved game data loaded!";
-    }
-    else
-    {
-        gotoXY(18, 7);
-        cout << "Loading game data ";
-        delay(500);
-        cout << ". ";
-        delay(500);
-        cout << ". ";
-        delay(500);
-        cout << ". ";
-        gotoXY(18, 9);
-        cout << "No game data saved by this name! Please retry!";
-        delay(2000);
-        system("cls");
-        goto addUserData;
-    }
+    strcpy(playerName, name);
+    hasData = true;
 }
 
 #endif

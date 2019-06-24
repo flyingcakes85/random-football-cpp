@@ -187,7 +187,7 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Easy mode!";
-                            startGame(5, player);
+                            startGame(6, player);
                             playing = false;
                             break;
 
@@ -195,7 +195,7 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Intermediate mode!";
-                            startGame(4, player);
+                            startGame(5, player);
                             playing = false;
                             break;
 
@@ -203,7 +203,7 @@ mainMenu:
                             system("cls");
                             gotoXY(15, 5);
                             cout << "Difficult mode!";
-                            startGame(3, player);
+                            startGame(4, player);
                             playing = false;
                             break;
                         }
