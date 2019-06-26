@@ -134,22 +134,22 @@ mainMenu:
 
         if (GetAsyncKeyState(VK_DOWN) && x != 11)
         {
-            gotoXY(16, x+3);
-            gotoXY(16, x+3);
+            gotoXY(16, x + 3);
+            gotoXY(16, x + 3);
             cout << "  ";
             x++;
-            gotoXY(16, x+3);
+            gotoXY(16, x + 3);
             cout << "->";
             menuItem++;
             continue;
         }
         if (GetAsyncKeyState(VK_UP) && x != 6)
         {
-            gotoXY(16, x+3);
-            gotoXY(16, x+3);
+            gotoXY(16, x + 3);
+            gotoXY(16, x + 3);
             cout << "  ";
             x--;
-            gotoXY(16, x+3);
+            gotoXY(16, x + 3);
             cout << "->";
             menuItem--;
             continue;
@@ -378,11 +378,9 @@ mainMenu:
                                 {
                                     playerPowerUp.skipTheToss += 5;
                                     playerCoins -= 500;
-                                    player.updateCoins(1);
+                                    player.updateCoins(-500);
                                     player.updatePowerUp(1);
                                     gotoXY(24, 12);
-                                    cout << "Contacting store server. ";
-                                    delay(1000);
                                     cout << "Processing your item. ";
                                     delay(1000);
                                     cout << "Buying ";
@@ -432,11 +430,9 @@ mainMenu:
                                 {
                                     playerPowerUp.lucky8 += 5;
                                     playerCoins -= 1000;
-                                    player.updateCoins(2);
+                                    player.updateCoins(-1000);
                                     player.updatePowerUp(2);
                                     gotoXY(24, 12);
-                                    cout << "Contacting store server. ";
-                                    delay(1000);
                                     cout << "Processing your item. ";
                                     delay(1000);
                                     cout << "Buying ";
@@ -486,11 +482,9 @@ mainMenu:
                                 {
                                     playerPowerUp.longShot += 5;
                                     playerCoins -= 1500;
-                                    player.updateCoins(3);
+                                    player.updateCoins(-1500);
                                     player.updatePowerUp(3);
                                     gotoXY(24, 12);
-                                    cout << "Contacting store server. ";
-                                    delay(1000);
                                     cout << "Processing your item. ";
                                     delay(1000);
                                     cout << "Buying ";

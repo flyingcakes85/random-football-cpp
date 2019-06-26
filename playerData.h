@@ -104,7 +104,7 @@ public:
         score[1] = 0;
         score[2] = 0;
 
-        coins = 0;
+        coins = 10000;
 
         playerPowerUp.longShot = 0;
         playerPowerUp.lucky8 = 0;
@@ -132,12 +132,16 @@ public:
     // Function to return PowerUp count
     powerups returnPowerUp();
 
-    // Function to update PowerUp Data
-    void updatePowerUp(int choice);
+    // Function to update PowerUp data
+    // choice = 1 : Skip The Toss
+    // choice = 2 : Lucky8
+    // choice = 3 : Long Shot
+    // amt defaults to 5
+    void updatePowerUp(int choice, int amt = 5);
 
     // Function to update coins
     // or the virtual money
-    void updateCoins(int choice);
+    void updateCoins(int amt);
 
     // Function to return coins
     // or the virtual money
@@ -189,19 +193,23 @@ powerups userData::returnPowerUp()
 }
 
 // Function to update PowerUp data
-void userData::updatePowerUp(int choice)
+// choice = 1 : Skip The Toss
+// choice = 2 : Lucky8
+// choice = 3 : Long Shot
+// amt defaults to 5
+void userData::updatePowerUp(int choice, int amt)
 {
     if (choice == 1)
     {
-        playerPowerUp.skipTheToss += 5;
+        playerPowerUp.skipTheToss += amt;
     }
     if (choice == 2)
     {
-        playerPowerUp.lucky8 += 5;
+        playerPowerUp.lucky8 += amt;
     }
     if (choice == 3)
     {
-        playerPowerUp.longShot += 5;
+        playerPowerUp.longShot += amt;
     }
 }
 
@@ -214,20 +222,9 @@ long int userData::returnCoins()
 
 // Function to update coins
 // or the virtual money
-void userData::updateCoins(int choice)
+void userData::updateCoins(int amt)
 {
-    if (choice == 1)
-    {
-        coins -= 500;
-    }
-    if (choice == 2)
-    {
-        coins -= 1000;
-    }
-    if (choice == 3)
-    {
-        coins -= 1500;
-    }
+    coins += amt;
 }
 
 // Function to save user
@@ -263,7 +260,7 @@ void userData::saveData()
     // Function to write
     savePlayerData.write((char *)&player, sizeof(player));
     gotoXY(20, 7);
-    cout << "Game data saved!"<<endl;
+    cout << "Game data saved!" << endl;
     system("pause");
 }
 
@@ -313,7 +310,7 @@ addUserData:
         cout << ". ";
         gotoXY(18, 9);
         loadPlayerData.read((char *)&player, sizeof(player));
-        cout << "Saved game data loaded!"<<endl;
+        cout << "Saved game data loaded!" << endl;
         system("pause");
     }
     else

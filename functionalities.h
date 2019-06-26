@@ -27,6 +27,7 @@
 #include <ctime>
 #include <ctype.h>
 #include "playerData.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -70,6 +71,13 @@ int *getUniqueRandomNumbers(int size)
     return theRandomNumbers;
 }
 
+char catchKeypress()
+{
+    int keypress = getch();
+    char cKeypress = keypress;
+    return cKeypress;
+}
+
 //Generates a random number and returns
 int getRandomNumber(int max)
 {
@@ -80,27 +88,6 @@ int getRandomNumber(int max)
 
     theRandomNumber = (rand() % max) + 1;
     return theRandomNumber;
-}
-
-// Checks whether the user inputed
-// numbers match the random number
-int checkMatch(int getno[])
-{
-    // Result = 1, if any of the user inputted number matches the random number
-    // Result = 0, if any of the user inputted number does not match the random number
-    int result = 0;
-
-    //using the getRandomNumber function
-    for (int i = 0; i < 5; i++)
-    {
-        if (getno[i] == getRandomNumber(10))
-        {
-            result = 1;
-            break;
-        }
-    }
-
-    return result;
 }
 
 // Receives an array of random numbers and
@@ -138,23 +125,25 @@ int checkMatchFromArray(int choice, int amt)
     return r;
 }
 
-/* int charToInt(char c[])
-{
-    int i = 0;
-    for (int i = 0; i < 2; ++i)
-    {
-        i += ((int)c[i]) * ((10) ^ (1 - i));
-    }
-    return i;
-} */
-
 // Function to emulate a toss
 //
 // 1 = PC wins
 // 2 = User wins
-int toss()
+int toss(int i)
 {
-    return getRandomNumber(2);
+    if (i == 99) // Fair Toss
+    {
+        return getRandomNumber(2);
+    }
+    else if (i == 98) // Unfair Toss while using powerup
+    {
+        delay(800);
+        return 2;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 // Checks if a given input is entirely numeric
@@ -169,6 +158,84 @@ int IsNumeric(char c[])
         }
     }
     return 0;
+}
+
+void usePowerup(userData &player)
+{
+    system("cls");
+    cout << "Choose a powerup";
+    powerups p = player.returnPowerUp();
+
+    cout << "Long Shot (" << p.longShot << ")" << endl
+         << "Lucky 8 (" << p.lucky8 << ")" << endl;
+}
+
+int chooseToSkipTheToss(userData &player)
+{
+    powerups p = player.returnPowerUp();
+    if (p.skipTheToss > 0)
+    {
+        player.updatePowerUp(1, -1);
+        cout << endl
+             << "Using powerup Skip The Toss." << endl;
+        return toss(98);
+    }
+    else
+    {
+        cout << "You dont have any Skip The Toss available." << endl
+             << "You currently have " << player.returnCoins() << " coins left." << endl
+             << "Would you like to purchase a pack of 5 for 500 coins? (y/n)";
+        char keyPressed;
+    keyPressForYN:
+        keyPressed = catchKeypress();
+        if (keyPressed == 'Y' || keyPressed == 'y')
+        {
+            if (player.returnCoins() >= 500)
+            {
+
+                player.updatePowerUp(1);
+                player.updateCoins(-500);
+
+                cout << "Processing your item. ";
+                delay(1000);
+                cout << "Buying ";
+                delay(500);
+                cout << ". ";
+                delay(500);
+                cout << ". ";
+                delay(500);
+                cout << ". ";
+                delay(500);
+                gotoXY(20, 15);
+                cout << "Thank you for visiting the store. 5x PowerUps: Skip The Toss added!";
+                player.saveData();
+
+                cout << endl
+                     << "Using powerup Skip The Toss." << endl;
+                delay(1000);
+                return 98;
+            }
+            else
+            {
+                cout << "Not enough coins! Doing a fair toss.";
+                delay(1000);
+                return 99;
+            }
+        }
+        else if (keyPressed == 'n' || keyPressed == 'N')
+        {
+            cout << endl
+                 << "Doing a fair toss." << endl;
+                 delay(1000);
+            return 98;
+        }
+        else
+        {
+            cout << endl
+                 << "Please enter y or n only!" << endl;
+            goto keyPressForYN;
+        }
+    }
 }
 
 // Function handling all functionalities of the game
@@ -211,7 +278,7 @@ int startGame(int guesses, userData &player)
         {
             cout << endl
                  << "Please enter only numbers!" << endl
-                 << "Enter a game durtaion (b/w 15 and 100): ";
+                 << "Enter a game duration (b/w 15 and 100): ";
             cin >> cduration;
         }
         else
@@ -228,9 +295,17 @@ int startGame(int guesses, userData &player)
 
     //Toss to decide initial ball possession
     bool playerHasBall;
-    cout << "Doing toss for ball possession.";
-    delay(600);
-    if (toss() == 2)
+    cout << "Doing toss for ball possession." << endl
+         << "Would you like to use Skip The Toss (y/n) ?" << endl;
+    char t = catchKeypress();
+    int tossNo;
+    if (t == 'y' || t == 'Y')
+    {
+        tossNo = chooseToSkipTheToss(player);
+    }
+
+    //delay(600);
+    if (toss(tossNo) == 2)
     {
         cout << endl
              << "You won the toss!" << endl
@@ -257,6 +332,9 @@ int startGame(int guesses, userData &player)
     bool increment;
     cout << "Game will start in 3 seconds";
     delay(3000);
+
+    char keyPressed;
+
     for (int i = 0; i < duration;)
     {
         system("cls");
@@ -264,17 +342,18 @@ int startGame(int guesses, userData &player)
         increment = false;
 
         // Print the score
-        cout << "Current score" << endl
-             << "PC : " << score[1] << endl
-             << "You : " << score[0] << endl;
+        gotoXY(6, 0);
+        cout << "PC " << score[1] << " : " << score[0] << " You" << endl;
 
+        cout << endl;
+        gotoXY(0, 2);
         if (playerHasBall == true)
         {
             cout << "\nYou have the ball\n";
         }
         else
         {
-            cout << "\nPC has the ball";
+            cout << "\nPC has the ball\n";
         }
 
         if (playerHasBall == true)
@@ -283,8 +362,33 @@ int startGame(int guesses, userData &player)
             if (playerDistanceFromGoal == 0)
             {
                 cout << "It's time to shoot a goal!" << endl;
-                cout << "Enter a number: ";
+                cout << "Enter a number or press p for powerup\n";
+
+                keyPressed = catchKeypress();
+                if (keyPressed == 'p' || keyPressed == 'P')
+                {
+                    usePowerup(player);
+                }
+                else
+                {
+                    cout << keyPressed;
+                }
                 cin >> choice;
+                for (;;)
+                {
+                    if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                    {
+                        break;
+                    }
+                    else
+                    {
+
+                        cout << endl
+                             << "Please enter a number between 1 and 10!" << endl
+                             << "Enter your choice or press p for powerup:  ";
+                        cin >> choice;
+                    }
+                }
                 playerHasBall = false;
 
                 if (checkMatchFromArray(choice, guesses) == 0)
@@ -300,9 +404,30 @@ int startGame(int guesses, userData &player)
                 }
             }
             cout << "You are " << playerDistanceFromGoal << " steps away from goal.\n\n";
-            cout << "Enter a Number: ";
-            cin >> choice;
+            cout << "Enter a Number or press p for powerup player\n";
+
+            keyPressed = catchKeypress();
+
             ++i;
+            if (keyPressed == 'p' || keyPressed == 'P')
+            {
+                usePowerup(player);
+            }
+            cin >> choice;
+            for (;;)
+            {
+                if (choice >= 1 && choice <= 10)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << endl
+                         << "Please enter a number between 1 and 10!" << endl
+                         << "Enter your choice: ";
+                    cin >> choice;
+                }
+            }
             increment = true;
 
             if (checkMatchFromArray(choice, guesses) == 0)
@@ -316,13 +441,32 @@ int startGame(int guesses, userData &player)
         }
         else
         {
-            system("cls");
-
             if (playerDistanceFromGoal == 6)
             {
                 cout << "PC will now shoot a goal!" << endl;
-                cout << "Enter a number: ";
+                cout << "Enter a number or press p for powerup player\n";
+
+                keyPressed = catchKeypress();
+
+                if (keyPressed == 'p' || keyPressed == 'P')
+                {
+                    usePowerup(player);
+                }
                 cin >> choice;
+                for (;;)
+                {
+                    if (choice >= 1 && choice <= 10)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        cout << endl
+                             << "Please enter a number between 1 and 10!" << endl
+                             << "Enter your choice: ";
+                        cin >> choice;
+                    }
+                }
                 playerHasBall = true;
 
                 if (checkMatchFromArray(choice, guesses) == 0)
@@ -339,10 +483,30 @@ int startGame(int guesses, userData &player)
             }
 
             cout << "PC is " << (6 - playerDistanceFromGoal) << " steps away from goal.\n\n";
-            cout << "Enter a Number: ";
-            cin >> choice;
-            ++i;
+            cout << "Enter a Number or press p for powerup player\n";
 
+            keyPressed = catchKeypress();
+            ++i;
+            if (keyPressed == 'p' || keyPressed == 'P')
+            {
+                usePowerup(player);
+            }
+
+            cin >> choice;
+            for (;;)
+            {
+                if (choice >= 1 && choice <= 10)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << endl
+                         << "Please enter a number between 1 and 10!" << endl
+                         << "Enter your choice: ";
+                    cin >> choice;
+                }
+            }
             if (checkMatchFromArray(choice, guesses) == 1)
             {
                 ++playerDistanceFromGoal;
