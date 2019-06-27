@@ -104,7 +104,7 @@ public:
         score[1] = 0;
         score[2] = 0;
 
-        coins = 10000;
+        coins = 5000;
 
         playerPowerUp.longShot = 0;
         playerPowerUp.lucky8 = 0;
