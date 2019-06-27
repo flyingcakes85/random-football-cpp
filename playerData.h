@@ -155,6 +155,12 @@ public:
 
     // Return hasData
     bool HasData();
+
+    // Update Score
+    void updateScore(int i)
+    {
+        ++score[i];
+    }
 } player;
 
 // Function to input
