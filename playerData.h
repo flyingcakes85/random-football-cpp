@@ -26,11 +26,6 @@
 
 using namespace std;
 
-/**
- * This file contains the class and member functions
- * to handle various operations dealing with the user profile
- */
-
 //Function for delay
 void delay(unsigned int mseconds)
 {
@@ -50,7 +45,8 @@ void gotoXY(int x, int y)
     SetConsoleCursorPosition(console, CP);
 }
 
-// Structure to hold variables for various power-ups
+// Structure to hold variables
+// for various power-ups
 struct powerups
 {
     // Power-up to allow player to
@@ -70,7 +66,6 @@ struct powerups
     int skipTheToss;
 };
 
-// The main class, that stores all data and contains the member functions
 class userData
 {
     // Variable to store score
@@ -82,6 +77,7 @@ class userData
     // Variable to hold player's name
     char playerName[50];
 
+
     // Coins, or the virtual money
     long int coins;
 
@@ -91,20 +87,19 @@ class userData
     // Player's selected team
     char myTeam[50];
 
-    // Checks if class has data
+    // Checks if class
+    // has data
     bool hasData;
 
 public:
     // Default Constructor
     userData()
     {
-        // Initialize all variables
-
         score[0] = 0;
         score[1] = 0;
         score[2] = 0;
 
-        coins = 5000;
+        coins = 0;
 
         playerPowerUp.longShot = 0;
         playerPowerUp.lucky8 = 0;
@@ -112,7 +107,6 @@ public:
 
         hasData = false;
     }
-
     //Function to input player's data
     void input();
 
@@ -132,16 +126,12 @@ public:
     // Function to return PowerUp count
     powerups returnPowerUp();
 
-    // Function to update PowerUp data
-    // choice = 1 : Skip The Toss
-    // choice = 2 : Lucky8
-    // choice = 3 : Long Shot
-    // amt defaults to 5
-    void updatePowerUp(int choice, int amt = 5);
+    // Function to update PowerUp Data
+    void updatePowerUp(int choice);
 
     // Function to update coins
     // or the virtual money
-    void updateCoins(int amt);
+    void updateCoins(int choice);
 
     // Function to return coins
     // or the virtual money
@@ -155,14 +145,7 @@ public:
 
     // Return hasData
     bool HasData();
-
-    // Update Score
-    void updateScore(int i)
-    {
-        ++score[i];
-    }
 } player;
-
 // Function to input
 // user data
 void userData::input()
@@ -199,23 +182,19 @@ powerups userData::returnPowerUp()
 }
 
 // Function to update PowerUp data
-// choice = 1 : Skip The Toss
-// choice = 2 : Lucky8
-// choice = 3 : Long Shot
-// amt defaults to 5
-void userData::updatePowerUp(int choice, int amt)
+void userData::updatePowerUp(int choice)
 {
-    if (choice == 1)
+    if(choice == 1)
     {
-        playerPowerUp.skipTheToss += amt;
+        playerPowerUp.skipTheToss+=5;
     }
-    if (choice == 2)
+    if(choice == 2)
     {
-        playerPowerUp.lucky8 += amt;
+        playerPowerUp.lucky8+=5;
     }
-    if (choice == 3)
+    if(choice == 3)
     {
-        playerPowerUp.longShot += amt;
+        playerPowerUp.longShot+=5;
     }
 }
 
@@ -228,9 +207,20 @@ long int userData::returnCoins()
 
 // Function to update coins
 // or the virtual money
-void userData::updateCoins(int amt)
+void userData::updateCoins(int choice)
 {
-    coins += amt;
+    if(choice == 1)
+    {
+        coins-=500;
+    }
+    if(choice == 2)
+    {
+        coins-=1000;
+    }
+    if(choice == 3)
+    {
+        coins-=1500;
+    }
 }
 
 // Function to save user
@@ -238,8 +228,7 @@ void userData::updateCoins(int amt)
 void userData::saveData()
 {
     system("cls");
-    /**
-     * Function to save data
+    /**Function to save data
      * from the class &u (passed as argument)
      * to a file in binary format
      * Save file location should be:
@@ -249,12 +238,12 @@ void userData::saveData()
      */
 
     char playerNameForSave[50];
-    if (hasData == false)
+    if(hasData == false)
     {
-        gotoXY(15, 5);
-        cout << "Please enter a name: ";
-        scanf(" %[^\n]s\n", playerNameForSave);
-        setPlayerName(playerNameForSave);
+    gotoXY(15, 5);
+    cout << "Please enter a name: ";
+    scanf(" %[^\n]s\n", playerNameForSave);
+    setPlayerName(playerNameForSave);
     }
     strcpy(playerNameForSave, getPlayerName());
     char saveFileName[100];
@@ -262,12 +251,11 @@ void userData::saveData()
     strcat(saveFileName, playerNameForSave);
     strcat(saveFileName, ".dat");
     ofstream savePlayerData;
-    savePlayerData.open(saveFileName, ios::out | ios::binary);
+    savePlayerData.open(saveFileName, ios::out|ios::binary);
     // Function to write
-    savePlayerData.write((char *)&player, sizeof(player));
+    savePlayerData.write((char*)&player, sizeof(player));
     gotoXY(20, 7);
-    cout << "Game data saved!" << endl;
-    system("pause");
+    cout << "Game data saved!";
 }
 
 // Return hasData
@@ -290,12 +278,12 @@ void userData::loadData()
      */
 addUserData:
     char playerNameForLoad[50];
-    if (hasData == false)
+    if(hasData == false)
     {
-        gotoXY(15, 5);
-        cout << "Please enter a name: ";
-        scanf(" %[^\n]s\n", playerNameForLoad);
-        setPlayerName(playerNameForLoad);
+    gotoXY(15, 5);
+    cout << "Please enter a name: ";
+    scanf(" %[^\n]s\n", playerNameForLoad);
+    setPlayerName(playerNameForLoad);
     }
     strcpy(playerNameForLoad, getPlayerName());
     char loadFileName[100];
@@ -303,7 +291,7 @@ addUserData:
     strcat(loadFileName, playerNameForLoad);
     strcat(loadFileName, ".dat");
     ifstream loadPlayerData;
-    loadPlayerData.open(loadFileName, ios::in | ios::binary);
+    loadPlayerData.open(loadFileName, ios::in|ios::binary);
     if (loadPlayerData)
     {
         gotoXY(18, 7);
@@ -315,9 +303,8 @@ addUserData:
         delay(500);
         cout << ". ";
         gotoXY(18, 9);
-        loadPlayerData.read((char *)&player, sizeof(player));
-        cout << "Saved game data loaded!" << endl;
-        system("pause");
+        loadPlayerData.read((char*)&player, sizeof(player));
+        cout << "Saved game data loaded!";
     }
     else
     {
