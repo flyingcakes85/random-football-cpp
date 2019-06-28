@@ -692,6 +692,7 @@ int startGame(int guesses, userData &player)
                 {
                     cout << "PC scored a goal!";
                     ++score[1];
+                    playerDistanceFromGoal = 3;
                     goto endOfLoop;
                 }
             }
