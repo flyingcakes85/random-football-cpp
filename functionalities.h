@@ -774,7 +774,7 @@ endOfLoop:
     gotoXY(15, 7);
     cout << "Final score: ";
     gotoXY(15, 10);
-    cout << "PC " << score[0] <<" : " << score[1] <<" You";
+    cout << "PC " << score[1] <<" : " << score[0] <<" You";
 
     // Update stats
     player.updateGameCount();
