@@ -214,8 +214,9 @@ void usePowerup(userData &player, int guesses)
                 if (checkMatchFromArray(choice, guesses) == 0)
                 {
                     cout << "Thats a goal!";
+                    delay(400);
                     ++score[0];
-                    playerDistanceFromGoal=3;
+                    playerDistanceFromGoal = 3;
                 }
                 else
                 {
@@ -261,8 +262,9 @@ void usePowerup(userData &player, int guesses)
                         if (checkMatchFromArray(choice, guesses) == 0)
                         {
                             cout << "Thats a goal!";
+                            delay(400);
                             ++score[0];
-                            playerDistanceFromGoal=3;
+                            playerDistanceFromGoal = 3;
                         }
                         else
                         {
@@ -305,8 +307,9 @@ void usePowerup(userData &player, int guesses)
                 if (checkMatchFromArray(choice, 8) == 0)
                 {
                     cout << "Thats a goal!";
+                    delay(400);
                     ++score[0];
-                    playerDistanceFromGoal=3;
+                    playerDistanceFromGoal = 3;
                 }
                 else
                 {
@@ -351,8 +354,9 @@ void usePowerup(userData &player, int guesses)
                         if (checkMatchFromArray(choice, 8) == 0)
                         {
                             cout << "Thats a goal!";
+                            delay(400);
                             ++score[0];
-                            playerDistanceFromGoal=3;
+                            playerDistanceFromGoal = 3;
                         }
                         else
                         {
@@ -601,8 +605,9 @@ int startGame(int guesses, userData &player)
                 if (checkMatchFromArray(choice, guesses) == 0)
                 {
                     cout << "Thats a goal!";
+                    delay(400);
                     ++score[0];
-                    playerDistanceFromGoal=3;
+                    playerDistanceFromGoal = 3;
                     goto endOfLoop;
                 }
                 else
@@ -735,7 +740,13 @@ int startGame(int guesses, userData &player)
         cout << "\n\n\n\nEnd of loop " << i;
         delay(1000);
     }
-    system("clear");
+    system("cls");
+    cout << "GAME OVER" << endl
+         << endl
+         << "Result" << endl
+         << "PC: " << score[1] << endl
+         << "You: " << score[0] << endl
+         << endl;
     //Update Score
     if (score[0] > score[1])
     {
