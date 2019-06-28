@@ -203,7 +203,7 @@ PowerUp:
                     {
                         usePowerup(player, guesses);
                     }
-                    else if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                    else if (choice >= 1 && choice <= 10)
                     {
                         break;
                     }
@@ -254,7 +254,7 @@ PowerUp:
                             {
                                 usePowerup(player, guesses);
                             }
-                            else if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                            else if (choice >= 1 && choice <= 10)
                             {
                                 break;
                             }
@@ -291,7 +291,9 @@ PowerUp:
             {
                 player.updatePowerUp(2, -1);
                 gotoXY(15, 11);
-                cout << "Enter a number between 1 and 10! Enter 11 to use a PowerUp: ";
+                cout << endl
+                     << "You choose Lucky8!" << endl
+                     << "Enter a number between 1 and 10! Enter 11 to use a PowerUp: ";
                 cin >> choice;
                 for (;;)
                 {
@@ -299,7 +301,7 @@ PowerUp:
                     {
                         usePowerup(player, guesses);
                     }
-                    else if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                    else if (choice >= 1 && choice <= 10)
                     {
                         break;
                     }
@@ -340,7 +342,8 @@ PowerUp:
                         player.updatePowerUp(2, 5);
                         player.updatePowerUp(2, -1);
                         gotoXY(15, 15);
-                        cout << "Enter a number between 1 and 10! Enter 11 to use a PowerUp: ";
+                        cout << endl
+                             << "Enter a number between 1 and 10! Enter 11 to use a PowerUp: ";
                         cin >> choice;
                         for (;;)
                         {
@@ -348,7 +351,7 @@ PowerUp:
                             {
                                 usePowerup(player, guesses);
                             }
-                            else if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                            else if (choice >= 1 && choice <= 10)
                             {
                                 break;
                             }
@@ -382,7 +385,7 @@ PowerUp:
         else
         {
             gotoXY(17, 11);
-            cout << "Wrong choice! Please enter only 1 or 2";
+            cout << "Wrong choice! Please enter only 1 or 2 ";
             delay(2500);
             goto PowerUp;
         }
@@ -408,7 +411,7 @@ int chooseToSkipTheToss(userData &player)
         gotoXY(15, 10);
         cout << "Would you like to purchase a pack of 5 for 500 coins? [Yes(Y)/No(N)]?";
         char keyPressed;
-keyPressForYN:
+    keyPressForYN:
         keyPressed = catchKeypress();
         if (keyPressed == 'Y' || keyPressed == 'y')
         {
@@ -506,7 +509,8 @@ int startGame(int guesses, userData &player)
             else
             {
                 gotoXY(15, 12);
-                cout << "Please enter only numbers!" << "Enter a game duration (between 15 and 100): ";
+                cout << "Please enter only numbers!"
+                     << "Enter a game duration (between 15 and 100): ";
                 cin >> cduration;
             }
         }
@@ -560,7 +564,7 @@ int startGame(int guesses, userData &player)
     bool increment;
     gotoXY(15, 5);
     cout << "Game will start in ";
-    for(int time = 3; time >= 0; --time)
+    for (int time = 3; time >= 0; --time)
     {
         gotoXY(34, 5);
         cout << time << " seconds";
@@ -610,7 +614,7 @@ int startGame(int guesses, userData &player)
                         usePowerup(player, guesses);
                         goto endOfLoop;
                     }
-                    else if (choice >= 1 && choice <= 10) //|| choice == 98 || choice == 99)
+                    else if (choice >= 1 && choice <= 10)
                     {
                         break;
                     }
@@ -759,7 +763,7 @@ int startGame(int guesses, userData &player)
             }
         }
 
-endOfLoop:
+    endOfLoop:
         if (increment == false)
         {
             ++i;
@@ -774,7 +778,7 @@ endOfLoop:
     gotoXY(15, 7);
     cout << "Final score: ";
     gotoXY(15, 10);
-    cout << "PC " << score[1] <<" : " << score[0] <<" You";
+    cout << "PC " << score[1] << " : " << score[0] << " You";
 
     // Update stats
     player.updateGameCount();
