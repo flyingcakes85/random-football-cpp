@@ -59,8 +59,8 @@ struct powerups
     int longShot;
 
     // Power-up to allow player to
-    // select upto 8 numbers depending
-    //on difficulty chosen
+    // select up to 8 numbers depending
+    // on difficulty chosen
     int lucky8;
 
     // Power-up to allow player to
@@ -70,7 +70,8 @@ struct powerups
     int skipTheToss;
 };
 
-// The main class, that stores all data and contains the member functions
+// The main class, that stores all data and
+// contains the member functions
 class userData
 {
     // Variable to store score
@@ -78,6 +79,16 @@ class userData
     // index 1 : loses
     // index 2 : draws
     int score[3];
+
+    // Variable to store total
+    // Goals scored and conceded
+    // index 0: scored
+    // index 1: conceded
+    int goalCount[2];
+
+    // Variable to store number of
+    // Games played
+    int gameCount;
 
     // Variable to hold player's name
     char playerName[50];
@@ -104,6 +115,11 @@ public:
         score[1] = 0;
         score[2] = 0;
 
+        goalCount[0] = 0;
+        goalCount[1] = 0;
+
+        gameCount = 0;
+
         coins = 5000;
 
         playerPowerUp.longShot = 0;
@@ -129,6 +145,18 @@ public:
     // Function to update playerName
     void setPlayerName(char name[]);
 
+    // Function to update gameCount
+    void updateGameCount();
+
+    // Function to return gameCount
+    int getGameCount();
+
+    // Function to update goalCount
+    void updateGoalCount(int scored, int conceded);
+
+    // Function to return goalCount
+    int *getGoalCount();
+
     // Function to return PowerUp count
     powerups returnPowerUp();
 
@@ -153,6 +181,8 @@ public:
     // Function to set team
     void setTeam(char mySelectedTeam[50]);
 
+    // Function to get playerTeam
+    const char *getPlayerTeam() const;
     // Return hasData
     bool HasData();
 
@@ -161,6 +191,9 @@ public:
     {
         ++score[i];
     }
+
+    // Function to get score
+    int *getScore();
 } player;
 
 // Function to input
@@ -179,6 +212,12 @@ const char *userData::getPlayerName() const
     return playerName;
 }
 
+// Function to get playerTeam
+const char *userData::getPlayerTeam() const
+{
+    return myTeam;
+}
+
 // Function to update playerName
 void userData::setPlayerName(char name[])
 {
@@ -190,6 +229,37 @@ void userData::setPlayerName(char name[])
 void userData::setTeam(char mySelectedTeam[50])
 {
     strcpy(myTeam, mySelectedTeam);
+}
+
+//Function to update goalCount
+void userData::updateGoalCount(int scored, int conceded)
+{
+    goalCount[0] += scored;
+    goalCount[1] += conceded;
+}
+
+// Function to get goalCount
+int *userData::getGoalCount()
+{
+    return goalCount;
+}
+
+// Function to update gameCount
+void userData::updateGameCount()
+{
+    gameCount++;
+}
+
+// Function to get gameCount
+int userData::getGameCount()
+{
+    return gameCount;
+}
+
+// Function to get score
+int *userData::getScore()
+{
+    return score;
 }
 
 // Function to return PowerUp count
@@ -237,6 +307,7 @@ void userData::updateCoins(int amt)
 // data on the disk
 void userData::saveData()
 {
+saveUserData:
     system("cls");
     /**
      * Function to save data
@@ -256,18 +327,21 @@ void userData::saveData()
         scanf(" %[^\n]s\n", playerNameForSave);
         setPlayerName(playerNameForSave);
     }
+
+    // Setting path for file
     strcpy(playerNameForSave, getPlayerName());
     char saveFileName[100];
     strcpy(saveFileName, "C:\\RandomFootball\\");
     strcat(saveFileName, playerNameForSave);
     strcat(saveFileName, ".dat");
+
+    // Opening the file
     ofstream savePlayerData;
     savePlayerData.open(saveFileName, ios::out | ios::binary);
     // Function to write
     savePlayerData.write((char *)&player, sizeof(player));
     gotoXY(20, 7);
     cout << "Game data saved!" << endl;
-    system("pause");
 }
 
 // Return hasData
@@ -281,29 +355,32 @@ bool userData::HasData()
 void userData::loadData()
 {
     system("cls");
-/**Function to load data
-     * from the file at :
-     * C:\RandomFootball\[name].dat
-     * to the class u passed as argument
-     *
-     * name has also been passed as argument
-     */
-addUserData:
+    /**Function to load data
+    * from the file at :
+    * C:\RandomFootball\[name].dat
+    * to the class u passed as argument
+    *
+    * name has also been passed as argument
+    */
+loadUserData:
     char playerNameForLoad[50];
-    if (hasData == false)
-    {
-        gotoXY(15, 5);
-        cout << "Please enter a name: ";
-        scanf(" %[^\n]s\n", playerNameForLoad);
-        setPlayerName(playerNameForLoad);
-    }
+    gotoXY(15, 5);
+    cout << "Please enter a name: ";
+    scanf(" %[^\n]s\n", playerNameForLoad);
+    setPlayerName(playerNameForLoad);
     strcpy(playerNameForLoad, getPlayerName());
+
+    // Setting path for file
     char loadFileName[100];
     strcpy(loadFileName, "C:\\RandomFootball\\");
     strcat(loadFileName, playerNameForLoad);
     strcat(loadFileName, ".dat");
+
+    // Opening the file
     ifstream loadPlayerData;
     loadPlayerData.open(loadFileName, ios::in | ios::binary);
+
+    // Checking if file exists
     if (loadPlayerData)
     {
         gotoXY(18, 7);
@@ -315,9 +392,9 @@ addUserData:
         delay(500);
         cout << ". ";
         gotoXY(18, 9);
+        // Function to read
         loadPlayerData.read((char *)&player, sizeof(player));
         cout << "Saved game data loaded!" << endl;
-        system("pause");
     }
     else
     {
@@ -333,7 +410,7 @@ addUserData:
         cout << "No game data saved by this name! Please retry!";
         delay(2000);
         system("cls");
-        goto addUserData;
+        goto loadUserData;
     }
 }
 
