@@ -423,9 +423,8 @@ void userData::selectTeam()
             }
         }
     }
-    system("pause>nul");
+    delay(1500);
     selectingTeam = false;
 }
-
 
 #endif

@@ -247,7 +247,7 @@ int *userData::getGoalCount()
 // Function to update gameCount
 void userData::updateGameCount()
 {
-    gameCount++;
+    ++gameCount;
 }
 
 // Function to get gameCount
