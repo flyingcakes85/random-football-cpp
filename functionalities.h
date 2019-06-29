@@ -121,7 +121,7 @@ int checkMatchFromArray(int choice, int amt)
 
     int r = 1;
 
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < amt; ++i)
     {
 
         if (choice == *(p + i))
