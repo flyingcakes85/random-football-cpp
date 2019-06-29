@@ -404,7 +404,7 @@ int chooseToSkipTheToss(userData &player)
     {
         player.updatePowerUp(1, -1);
         gotoXY(15, 8);
-        cout << "Using powerup Skip The Toss." << endl;
+        cout << "Using PowerUp: Skip The Toss." << endl;
         return 98;
     }
     else
