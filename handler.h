@@ -141,8 +141,65 @@ void showStats()
 // help text for the game
 void showHelp()
 {
-    //this function shall be expanded later on;
-    cout << "This is the help text";
+    gotoXY(15, 5);
+    cout << "RandomFootball is a game, much like Ludo, but following the rules of football. It is a game based on probability.";
+    gotoXY(15, 8);
+    cout << "In this game, the computer generates a set of unique random numbers from 1 to 10. The player inputs a number from 1 to 10.";
+    gotoXY(15, 9);
+    cout << "If the number entered matches with one of the generated numbers, then the player moves ahead towards the goal. If the number";
+    gotoXY(15, 10);
+    cout << "does not match with any of the generated numbers, then the computer gets the possession and gets a chance to move towards";
+    gotoXY(15, 11);
+    cout << "the goal";
+
+    gotoXY(15, 14);
+    cout << "How to play? : ";
+    gotoXY(15, 16);
+    cout << "1. The game has three modes: Easy, Intermediate & Hard.";
+    gotoXY(25, 17);
+    cout << "Easy mode        : 6 Unique Random Numbers generated.";
+    gotoXY(25, 18);
+    cout << "Intermediate mode: 5 Unique Random Numbers generated.";
+    gotoXY(25, 19);
+    cout << "Hard mode        : 4 Unique Random Numbers generated.";
+    gotoXY(15, 21);
+    cout << "2. The player will then be asked for a duration to play a game. It is the number of times the player will be allowed to";
+    gotoXY(15, 22);
+    cout << "   input the number. After the entered duration terminates, the game ends.";
+    gotoXY(15, 24);
+    cout << "3. There will be a toss for deciding the initial ball possession between the player and the computer.";
+    gotoXY(15, 26);
+    cout << "4. Then, the game begins. Initially, both player and computer are 3 steps away from goal. Based on who won the toss, the";
+    gotoXY(15, 27);
+    cout << "   ball possession is set. The player inputs a number between 1 and 10. If the number entered matches one of the generated";
+    gotoXY(15, 28);
+    cout << "   numbers, then the player moves towards his/her goal, else the computer gets the ball.";
+    gotoXY(15, 30);
+    cout << "5. After the game ends, the result follows.";
+    gotoXY(20, 31);
+    cout << "Rewards: ";
+    gotoXY(22, 32);
+    cout << "Victory: 2000 coins";
+    gotoXY(22, 33);
+    cout << "Loss   : 1000 coins";
+    gotoXY(22, 34);
+    cout << "Tie    : '8 times the duration' coins";
+    gotoXY(15, 37);
+    cout << "The game also has Power-Ups which give a certain special ability to the player.";
+    gotoXY(20, 38);
+    cout << "Skip The Toss: On activating this Power-Up, the player wins the toss and gets the initial ball possession.";
+    gotoXY(20, 39);
+    cout << "Lucky '8'    : On activating this Power-Up, the computer generates 8 numbers, giving player a greater chance";
+    gotoXY(20, 40);
+    cout << "               to match the generated number with the number entered.";
+    gotoXY(20, 41);
+    cout << "Long Shot    : On activating this Power-Up, the player gets a direct opportunity to score a goal without actually";
+    gotoXY(20, 42);
+    cout << "               reaching the goal.";
+    gotoXY(15, 45);
+    cout << "The game provides a Save and Load feature which allows you to save your game progress and load it anytime you play.";
+    gotoXY(15, 49);
+    cout << "WE HOPE YOU ENJOY PLAYING RandomFootball. GOOD LUCK! HAVE FUN!";
 }
 
 // Function to show the
