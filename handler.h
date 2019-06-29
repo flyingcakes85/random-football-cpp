@@ -60,9 +60,12 @@ void showStats()
 {
     gotoXY(15, 5);
     cout << "Welcome to the Statistics Centre! Here you can review your performances!";
-    system("pause>nul");
-    player.loadData();
-    delay(1500);
+    delay(2000);
+    if (player.HasData() == false)
+    {
+        player.loadData();
+    }
+
     system("cls");
 
     int *playerScore;
@@ -83,7 +86,6 @@ void showStats()
     cout << "Player's Team: ";
     gotoXY(35, 6);
     cout << player.getPlayerTeam();
-
 
     gotoXY(15, 8);
     cout << "Game statistics: ";
@@ -270,6 +272,10 @@ mainMenu:
                         difficultyItem++;
                         continue;
                     }
+                    if (GetAsyncKeyState(VK_BACK))
+                    {
+                        goto mainMenu;
+                    }
                     if (GetAsyncKeyState(VK_UP) && y != 6)
                     {
                         gotoXY(16, y);
@@ -366,7 +372,7 @@ mainMenu:
                             gotoXY(15, 5);
                             cout << "Saving game data!";
                             player.saveData();
-                            system("pause>nul");
+                            delay(1500);
                             goto mainMenu;
                             loadingSaving = false;
                             break;
@@ -375,7 +381,7 @@ mainMenu:
                             gotoXY(15, 5);
                             cout << "Loading game data!";
                             player.loadData();
-                            system("pause>nul");
+                            delay(1500);
                             goto mainMenu;
                             loadingSaving = false;
                             break;
