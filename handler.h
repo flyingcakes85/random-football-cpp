@@ -206,27 +206,31 @@ void showHelp()
 // about text for the game
 void showAbout()
 {
-    //this function shall be expanded later on;
+    gotoXY(15, 5);
+    cout << "RANDOM FOOTBALL CPP";
+    gotoXY(15, 7);
+    cout << "This game simulates a football game experience, using ";
+    gotoXY(15, 8);
+    cout << "random numbers. So, you are not dependent on your";
+    gotoXY(15, 9);
+    cout << "skills. Rather, you depend on sheer luck to win the ";
+    gotoXY(15, 10);
+    cout << "game, just like the game of Ludo!";
 
-    system("cls");
+    gotoXY(15, 15);
+    cout << "The game has been developed as a part of our summer break project by: ";
+    gotoXY(20, 16);
+    cout << "1.     Abhishek Dutta";
+    gotoXY(20, 17);
+    cout << "2.     Akshat Kareer";
+    gotoXY(20, 18);
+    cout << "3.     Nitesh Kumar Singh";
+    gotoXY(20, 19);
+    cout << "4.     Snehit Sah";
+    gotoXY(20, 20);
+    cout << "5.     Vedankshu Mazumder";
 
-    cout << "RANDOM FOOTBALL CPP" << endl
-         << " This game simulates a football game experience, using " << endl
-         << "random numbers. So, you are not dependent on your" << endl
-         << "skills. Rather, you depend on sheer luck to win the " << endl
-         << "game, just like the game of Ludo!" << endl
-         << endl
-         <<
-
-        "The game has been developed as a part of summer break" << endl
-         << "project by:" << endl
-         << "Abhishek Datta" << endl
-         << "Akshat Kareer" << endl
-         << "Nitesh Kumar Singh" << endl
-         << "Snehit Sah" << endl
-         << "Vedankshu Mazumder";
-
-    system("pause>null");
+    system("pause>nul");
 }
 
 //Function to show main menu
@@ -703,7 +707,6 @@ mainMenu:
 
             case 4:
                 system("cls");
-                gotoXY(15, 5);
                 showHelp();
                 system("pause>nul");
                 goto mainMenu;
@@ -712,7 +715,6 @@ mainMenu:
 
             case 5:
                 system("cls");
-                gotoXY(15, 5);
                 showAbout();
                 system("pause>nul");
                 goto mainMenu;
