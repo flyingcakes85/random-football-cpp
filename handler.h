@@ -207,7 +207,26 @@ void showHelp()
 void showAbout()
 {
     //this function shall be expanded later on;
-    cout << "This is the about text";
+
+    system("cls");
+
+    cout << "RANDOM FOOTBALL CPP" << endl
+         << " This game simulates a football game experience, using " << endl
+         << "random numbers. So, you are not dependent on your" << endl
+         << "skills. Rather, you depend on sheer luck to win the " << endl
+         << "game, just like the game of Ludo!" << endl
+         << endl
+         <<
+
+        "The game has been developed as a part of summer break" << endl
+         << "project by:" << endl
+         << "Abhishek Datta" << endl
+         << "Akshat Kareer" << endl
+         << "Nitesh Kumar Singh" << endl
+         << "Snehit Sah" << endl
+         << "Vedankshu Mazumder";
+
+    system("pause>null");
 }
 
 //Function to show main menu
