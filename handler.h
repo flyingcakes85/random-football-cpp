@@ -229,8 +229,6 @@ void showAbout()
     cout << "4.     Snehit Sah";
     gotoXY(20, 20);
     cout << "5.     Vedankshu Mazumder";
-
-    system("pause>nul");
 }
 
 //Function to show main menu
